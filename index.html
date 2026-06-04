@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Razer ATLAS — Shipping Intelligence</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Barlow:wght@300;400;500&display=swap');
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Barlow',sans-serif;background:#050505;min-height:100vh;display:flex;align-items:flex-start;justify-content:center;padding:24px 16px}
+.page-wrap{width:100%;max-width:680px}
+.rz-wrap{background:#0a0a0a;border-radius:12px;overflow:visible;border:1px solid #1e1e1e}
+.rz-topbar{background:#0d0d0d;border-bottom:1px solid #1e1e1e;padding:14px 22px;display:flex;align-items:center;gap:14px;border-radius:12px 12px 0 0}
+.rz-vdiv{width:1px;height:22px;background:#2a2a2a}
+.rz-wordmark{font-family:'Rajdhani',sans-serif;font-weight:700;font-size:18px;color:#fff;letter-spacing:3px;text-transform:uppercase;line-height:1}
+.rz-subtitle{font-size:10px;color:#44ff44;letter-spacing:2.5px;font-family:'Rajdhani',sans-serif;font-weight:500;text-transform:uppercase}
+.rz-body{padding:20px 22px}
+.rz-slabel{font-size:10px;letter-spacing:2px;color:#44ff44;font-family:'Rajdhani',sans-serif;font-weight:600;text-transform:uppercase;margin-bottom:10px;display:flex;align-items:center;gap:6px}
+.rz-slabel::before{content:'';display:inline-block;width:2px;height:11px;background:#44ff44;border-radius:1px}
+.rz-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px}
+.rz-field{display:flex;flex-direction:column;gap:5px;position:relative}
+.rz-field.full{grid-column:1/-1}
+.rz-lbl{font-size:10px;letter-spacing:1.5px;color:#555;font-family:'Rajdhani',sans-serif;font-weight:600;text-transform:uppercase}
+.rz-inp,.rz-sel{width:100%;height:40px;background:#111;border:1px solid #222;border-radius:4px;color:#ddd;font-family:'Barlow',sans-serif;font-size:13px;padding:0 12px;outline:none;transition:border-color .15s;-webkit-appearance:none;appearance:none}
+.rz-inp:focus,.rz-sel:focus{border-color:#44ff44;box-shadow:0 0 0 2px rgba(68,255,68,0.07)}
+.rz-inp::placeholder{color:#333}
+.rz-sel option,.rz-sel optgroup{background:#111;color:#ddd}
+.rz-autosug{position:absolute;top:100%;left:0;right:0;background:#161616;border:1px solid #2a2a2a;border-top:none;border-radius:0 0 6px 6px;z-index:200;max-height:220px;overflow-y:auto;box-shadow:0 8px 24px rgba(0,0,0,0.7)}
+.rz-sug-item{padding:9px 12px;font-size:12px;color:#aaa;cursor:pointer;border-bottom:1px solid #1a1a1a;line-height:1.4;display:flex;align-items:center;gap:8px}
+.rz-sug-item:last-child{border-bottom:none}
+.rz-sug-item:hover{background:#1e1e1e;color:#fff}
+.rz-sug-flag{font-size:16px;flex-shrink:0}
+.rz-sug-city{font-weight:500;color:#ddd;font-size:12px}
+.rz-sug-detail{font-size:11px;color:#444;margin-top:1px}
+.rz-sug-region{font-size:10px;color:#2a6e2a;font-family:'Rajdhani',sans-serif;letter-spacing:1px;text-transform:uppercase;margin-top:1px}
+.rz-wpill{display:inline-flex;align-items:center;gap:5px;margin-top:5px;background:rgba(68,255,68,0.07);border:1px solid rgba(68,255,68,0.2);border-radius:3px;padding:3px 9px;font-size:11px;color:#44ff44;font-family:'Rajdhani',sans-serif;letter-spacing:1px}
+.rz-sel-wrap{position:relative}
+.rz-sel-wrap::after{content:'';position:absolute;right:11px;top:50%;transform:translateY(-50%);width:0;height:0;border-left:4px solid transparent;border-right:4px solid transparent;border-top:5px solid #444;pointer-events:none}
+.rz-cal-wrap{position:relative}
+.rz-cal-inp::-webkit-calendar-picker-indicator{opacity:0;position:absolute;right:0;top:0;width:100%;height:100%;cursor:pointer}
+.rz-cal-icon{position:absolute;right:10px;top:50%;transform:translateY(-50%);color:#444;font-size:16px;pointer-events:none}
+.rz-prio-row{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:18px}
+.rz-prio{background:#111;border:1px solid #1e1e1e;border-radius:4px;padding:11px 8px;display:flex;flex-direction:column;align-items:center;gap:4px;cursor:pointer;transition:all .15s;color:#555;font-size:11px;font-family:'Rajdhani',sans-serif;font-weight:600;letter-spacing:1px;text-transform:uppercase}
+.rz-prio i{font-size:20px}
+.rz-prio:hover{border-color:#2e2e2e;color:#999}
+.rz-prio.active{border-color:#44ff44;color:#44ff44;background:rgba(68,255,68,0.05)}
+.rz-btn{width:100%;height:46px;background:#44ff44;color:#000;border:none;border-radius:4px;font-family:'Rajdhani',sans-serif;font-weight:700;font-size:14px;letter-spacing:3px;text-transform:uppercase;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;transition:opacity .15s}
+.rz-btn:hover{opacity:.88}
+.rz-loader{display:none;padding:28px 0;text-align:center}
+.rz-loader.on{display:block}
+.rz-bar-track{height:2px;background:#1a1a1a;border-radius:1px;overflow:hidden;margin-bottom:14px}
+.rz-bar-fill{height:100%;width:0%;background:#44ff44;animation:rzbar 2.4s ease forwards}
+@keyframes rzbar{0%{width:0}65%{width:80%}100%{width:100%}}
+.rz-ltxt{font-size:11px;color:#44ff44;font-family:'Rajdhani',sans-serif;letter-spacing:2px}
+.rz-results{display:none}
+.rz-results.on{display:block;margin-top:4px}
+.rz-sep{border:none;border-top:1px solid #1a1a1a;margin:18px 0}
+.rz-route-list{display:grid;gap:10px}
+.rz-card{background:#0f0f0f;border:1px solid #1e1e1e;border-radius:6px;padding:16px}
+.rz-card.rec{border-color:#44ff44}
+.rz-rec-pill{display:inline-block;background:#44ff44;color:#000;font-size:9px;font-weight:700;letter-spacing:2px;font-family:'Rajdhani',sans-serif;padding:2px 10px;border-radius:2px;margin-bottom:10px;text-transform:uppercase}
+.rz-card-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+.rz-mode-row{display:flex;align-items:center;gap:10px}
+.rz-mode-dot{width:36px;height:36px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:17px}
+.d-air{background:rgba(68,255,68,0.1);color:#44ff44}
+.d-sea{background:rgba(68,180,255,0.1);color:#44b4ff}
+.d-land{background:rgba(255,200,68,0.1);color:#ffc844}
+.d-multi{background:rgba(200,68,255,0.1);color:#c844ff}
+.rz-carrier-badge{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-family:'Rajdhani',sans-serif;letter-spacing:1px;padding:2px 8px;border-radius:3px;margin-top:3px}
+.badge-fedex{background:rgba(71,35,119,0.3);color:#9b70e0;border:1px solid rgba(71,35,119,0.5)}
+.badge-ups{background:rgba(90,60,20,0.3);color:#d4a030;border:1px solid rgba(90,60,20,0.5)}
+.badge-dhl{background:rgba(200,30,20,0.3);color:#ff6060;border:1px solid rgba(200,30,20,0.5)}
+.rz-mname{font-family:'Rajdhani',sans-serif;font-weight:600;font-size:15px;color:#e0e0e0;letter-spacing:1px}
+.rz-cost-val{font-family:'Rajdhani',sans-serif;font-size:22px;font-weight:700;color:#fff}
+.rz-cost-lbl{font-size:10px;color:#444;letter-spacing:1px;text-align:right}
+.rz-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:7px}
+.rz-stat{background:#0a0a0a;border:1px solid #1a1a1a;border-radius:4px;padding:8px 10px}
+.rz-stat-lbl{font-size:10px;color:#444;letter-spacing:1px;font-family:'Rajdhani',sans-serif;text-transform:uppercase;margin-bottom:3px}
+.rz-stat-val{font-size:13px;color:#bbb;font-weight:500}
+.rz-bars{margin-top:12px;padding-top:12px;border-top:1px solid #1a1a1a}
+.rz-brow{display:flex;align-items:center;gap:8px;margin-bottom:6px}
+.rz-blbl{font-size:10px;color:#444;width:70px;flex-shrink:0;font-family:'Rajdhani',sans-serif;letter-spacing:1px;text-transform:uppercase}
+.rz-btrack{flex:1;height:3px;background:#1a1a1a;border-radius:2px;overflow:hidden}
+.rz-bfill{height:100%;border-radius:2px;background:#44ff44}
+.rz-bnum{font-size:11px;color:#444;width:26px;text-align:right;font-family:'Rajdhani',sans-serif}
+.rz-note{margin-top:10px;padding-top:10px;border-top:1px solid #1a1a1a;font-size:12px;color:#555;line-height:1.5}
+.rz-reasoning{background:#0d0d0d;border:1px solid #1a1a1a;border-left:2px solid #44ff44;border-radius:0 4px 4px 0;padding:14px 16px;margin-top:14px}
+.rz-r-lbl{font-size:10px;color:#44ff44;letter-spacing:2px;font-family:'Rajdhani',sans-serif;font-weight:700;text-transform:uppercase;margin-bottom:6px}
+.rz-r-txt{font-size:12px;color:#555;line-height:1.7}
+.rz-disclaimer{margin-top:10px;padding:9px 12px;background:rgba(68,255,68,0.02);border:1px solid #1a1a1a;border-radius:4px;font-size:11px;color:#333;line-height:1.6;font-family:'Rajdhani',sans-serif;letter-spacing:0.5px}
+.rz-reset{width:100%;margin-top:14px;padding:10px;background:transparent;border:1px solid #1e1e1e;border-radius:4px;color:#444;font-family:'Rajdhani',sans-serif;font-size:11px;letter-spacing:2px;text-transform:uppercase;cursor:pointer;transition:all .15s}
+.rz-reset:hover{border-color:#2e2e2e;color:#777}
+.rz-err{display:none;margin-top:10px;padding:10px 14px;background:rgba(255,60,60,0.07);border:1px solid rgba(255,60,60,0.18);border-radius:4px;font-size:12px;color:#ff5555}
+.rz-err.on{display:block}
+.rz-minimap{background:#0a0f0a;border:1px solid #1e1e1e;border-radius:6px;margin-bottom:18px;overflow:hidden}
+.rz-minimap-header{padding:9px 14px 4px;display:flex;align-items:center;justify-content:space-between}
+.rz-minimap-lbl{font-size:10px;color:#44ff44;font-family:'Rajdhani',sans-serif;letter-spacing:2px;text-transform:uppercase;font-weight:600}
+.rz-minimap-hint{font-size:10px;color:#333;font-family:'Rajdhani',sans-serif;letter-spacing:1px}
+#rz-mapsvg{width:100%;display:block;height:190px}
+.rz-key-notice{margin-bottom:16px;padding:12px 14px;background:rgba(255,180,0,0.05);border:1px solid rgba(255,180,0,0.2);border-radius:4px;font-size:12px;color:#aa8800;line-height:1.6}
+.rz-key-notice strong{color:#ffcc00}
+</style>
+</head>
+<body>
+<div class="page-wrap">
+<div class="rz-wrap">
+  <div class="rz-topbar">
+    <svg width="38" height="38" viewBox="0 0 36 36" fill="none" style="flex-shrink:0">
+      <rect width="36" height="36" rx="6" fill="#111"/>
+      <path d="M8 10h12l4 5-4 5H8v-4h10l1.5-1L18 14H8v-4z" fill="#44ff44"/>
+      <path d="M16 20l3 6h-4l-3-6h4z" fill="#44ff44"/>
+      <circle cx="27" cy="22" r="3" fill="#44ff44" opacity=".4"/>
+      <circle cx="27" cy="22" r="1.5" fill="#44ff44"/>
+    </svg>
+    <div class="rz-vdiv"></div>
+    <div>
+      <div class="rz-wordmark">Razer</div>
+      <div class="rz-subtitle">Atlas — Shipping Intelligence</div>
+    </div>
+  </div>
+
+  <div class="rz-body">
+
+    <!-- API KEY NOTICE -->
+
+    <div id="rz-form">
+      <!-- MINIMAP -->
+      <div class="rz-minimap">
+        <div class="rz-minimap-header">
+          <div class="rz-minimap-lbl">Route minimap</div>
+          <div class="rz-minimap-hint" id="rz-map-hint">Select origin & destination to preview route</div>
+        </div>
+        <svg id="rz-mapsvg" viewBox="0 0 960 480" preserveAspectRatio="xMidYMid meet">
+          <rect width="960" height="480" fill="#0a0f0a"/>
+          <g id="rz-countries"></g>
+          <g id="rz-route"></g>
+        </svg>
+      </div>
+
+      <!-- ADDRESSES -->
+      <div style="margin-bottom:16px">
+        <div class="rz-slabel">Origin & destination</div>
+        <div class="rz-grid">
+          <div class="rz-field full" id="orig-field">
+            <div class="rz-lbl">Origin address</div>
+            <input class="rz-inp" id="rz-origin" type="text" placeholder="Type any city worldwide..." autocomplete="off" oninput="rzSuggest('origin',this.value)">
+            <div class="rz-autosug" id="sug-origin" style="display:none"></div>
+          </div>
+          <div class="rz-field full" id="dest-field">
+            <div class="rz-lbl">Destination address</div>
+            <input class="rz-inp" id="rz-dest" type="text" placeholder="Type any city worldwide..." autocomplete="off" oninput="rzSuggest('dest',this.value)">
+            <div class="rz-autosug" id="sug-dest" style="display:none"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PRODUCT & DETAILS -->
+      <div style="margin-bottom:16px">
+        <div class="rz-slabel">Product & shipment details</div>
+        <div class="rz-grid">
+          <div class="rz-field full">
+            <div class="rz-lbl">Product line</div>
+            <div class="rz-sel-wrap">
+              <select class="rz-sel" id="rz-product" onchange="rzFillWeight()">
+                <option value="">Select a Razer product...</option>
+                <optgroup label="── Mice">
+                  <option value="Razer DeathAdder V3 HyperSpeed" data-w="0.096">DeathAdder V3 HyperSpeed</option>
+                  <option value="Razer Viper V3 Pro" data-w="0.074">Viper V3 Pro</option>
+                  <option value="Razer Basilisk V3 X HyperSpeed" data-w="0.101">Basilisk V3 X HyperSpeed</option>
+                  <option value="Razer Naga V2 HyperSpeed" data-w="0.101">Naga V2 HyperSpeed</option>
+                  <option value="Razer Orochi V2" data-w="0.060">Orochi V2</option>
+                </optgroup>
+                <optgroup label="── Keyboards">
+                  <option value="Razer BlackWidow V4 Pro" data-w="1.44">BlackWidow V4 Pro</option>
+                  <option value="Razer Huntsman V3 Pro" data-w="1.52">Huntsman V3 Pro</option>
+                  <option value="Razer DeathStalker V2 Pro" data-w="0.81">DeathStalker V2 Pro</option>
+                  <option value="Razer Ornata V3" data-w="0.95">Ornata V3</option>
+                  <option value="Razer Cynosa V2" data-w="0.78">Cynosa V2</option>
+                </optgroup>
+                <optgroup label="── Headsets">
+                  <option value="Razer BlackShark V2 Pro" data-w="0.320">BlackShark V2 Pro</option>
+                  <option value="Razer Kraken V3 HyperSense" data-w="0.364">Kraken V3 HyperSense</option>
+                  <option value="Razer Barracuda X" data-w="0.250">Barracuda X</option>
+                  <option value="Razer Opus X" data-w="0.240">Opus X</option>
+                </optgroup>
+                <optgroup label="── Controllers">
+                  <option value="Razer Wolverine V2 Pro" data-w="0.275">Wolverine V2 Pro</option>
+                  <option value="Razer Kishi V2 Pro" data-w="0.098">Kishi V2 Pro</option>
+                  <option value="Razer Raion Fightpad" data-w="0.210">Raion Fightpad</option>
+                </optgroup>
+                <optgroup label="── Laptops">
+                  <option value="Razer Blade 14" data-w="1.78">Blade 14</option>
+                  <option value="Razer Blade 15" data-w="2.01">Blade 15</option>
+                  <option value="Razer Blade 16" data-w="2.16">Blade 16</option>
+                  <option value="Razer Blade 18" data-w="3.06">Blade 18</option>
+                </optgroup>
+                <optgroup label="── Monitors">
+                  <option value="Razer Raptor 27" data-w="6.80">Raptor 27</option>
+                  <option value="Razer Raptor 34" data-w="9.20">Raptor 34</option>
+                </optgroup>
+                <optgroup label="── Chairs">
+                  <option value="Razer Iskur V2" data-w="28.5">Iskur V2 Gaming Chair</option>
+                  <option value="Razer Enki Pro" data-w="31.2">Enki Pro Gaming Chair</option>
+                </optgroup>
+                <optgroup label="── Accessories">
+                  <option value="Razer Seiren V3 Mini" data-w="0.147">Seiren V3 Mini Mic</option>
+                  <option value="Razer Kiyo Pro Ultra" data-w="0.162">Kiyo Pro Ultra Webcam</option>
+                  <option value="Razer Leviathan V2 Pro" data-w="1.80">Leviathan V2 Pro Soundbar</option>
+                  <option value="Razer Chroma USB Controller" data-w="0.045">Chroma USB Controller</option>
+                </optgroup>
+              </select>
+            </div>
+            <div id="rz-wpill" style="display:none" class="rz-wpill">
+              <i class="ti ti-weight" aria-hidden="true" style="font-size:12px"></i>
+              <span id="rz-wtxt">Unit weight: —</span>
+            </div>
+          </div>
+          <div class="rz-field">
+            <div class="rz-lbl">Quantity (units)</div>
+            <input class="rz-inp" id="rz-qty" type="number" value="1" min="1" oninput="rzUpdateWeight()">
+          </div>
+          <div class="rz-field">
+            <div class="rz-lbl">Total weight (kg)</div>
+            <input class="rz-inp" id="rz-weight" type="number" placeholder="Auto-calculated" step="0.01" style="color:#44ff44">
+          </div>
+          <div class="rz-field full">
+            <div class="rz-lbl">Required delivery date</div>
+            <div class="rz-cal-wrap">
+              <input class="rz-inp rz-cal-inp" id="rz-deadline" type="date">
+              <i class="ti ti-calendar rz-cal-icon" aria-hidden="true"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PRIORITY -->
+      <div style="margin-bottom:16px">
+        <div class="rz-slabel">Optimization priority</div>
+        <div class="rz-prio-row">
+          <div class="rz-prio active" data-p="Balanced" onclick="rzPrio(this)"><i class="ti ti-scale" aria-hidden="true"></i>Balanced</div>
+          <div class="rz-prio" data-p="Speed" onclick="rzPrio(this)"><i class="ti ti-bolt" aria-hidden="true"></i>Fastest</div>
+          <div class="rz-prio" data-p="Cost" onclick="rzPrio(this)"><i class="ti ti-coin" aria-hidden="true"></i>Cheapest</div>
+        </div>
+      </div>
+
+      <button class="rz-btn" onclick="rzRun()">
+        <i class="ti ti-cpu" aria-hidden="true"></i>Analyze carrier rates
+      </button>
+      <div class="rz-err" id="rz-err"></div>
+    </div>
+
+    <!-- LOADER -->
+    <div class="rz-loader" id="rz-loader">
+      <div class="rz-bar-track"><div class="rz-bar-fill"></div></div>
+      <div class="rz-ltxt" id="rz-ltxt">Querying FedEx, UPS & DHL rates...</div>
+    </div>
+
+    <!-- RESULTS -->
+    <div class="rz-results" id="rz-results">
+      <div class="rz-sep"></div>
+      <div class="rz-slabel" style="margin-bottom:12px">Carrier rate comparison</div>
+      <div class="rz-route-list" id="rz-cards"></div>
+      <div class="rz-reasoning" id="rz-reasoning"></div>
+      <div class="rz-disclaimer">Rates are AI-estimated benchmarks based on published FedEx, UPS and DHL tariff structures for electronics shipments. Contact carriers directly for binding quotes. Fuel surcharges, remote area fees and customs duties are not included.</div>
+      <button class="rz-reset" onclick="rzReset()">
+        <i class="ti ti-refresh" aria-hidden="true" style="font-size:13px;vertical-align:-1px;margin-right:5px"></i>New analysis
+      </button>
+    </div>
+
+  </div>
+</div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/topojson/3.0.2/topojson.min.js"></script>
+<script>
+// ─────────────────────────────────────────────
+// 🔑 PASTE YOUR ANTHROPIC API KEY BELOW
+// API key handled server-side by Netlify function
+// ─────────────────────────────────────────────
+
+const CITIES=[
+  {city:"Toronto",country:"Canada",region:"North America",flag:"🇨🇦",province:"ON",postal:"M5H 2N2",lat:43.65,lng:-79.38,detail:"Toronto, ON M5H 2N2, Canada"},
+  {city:"Vancouver",country:"Canada",region:"North America",flag:"🇨🇦",province:"BC",postal:"V6C 1S4",lat:49.28,lng:-123.12,detail:"Vancouver, BC V6C 1S4, Canada"},
+  {city:"Montreal",country:"Canada",region:"North America",flag:"🇨🇦",province:"QC",postal:"H2Y 1C6",lat:45.50,lng:-73.57,detail:"Montreal, QC H2Y 1C6, Canada"},
+  {city:"Calgary",country:"Canada",region:"North America",flag:"🇨🇦",province:"AB",postal:"T2P 1J9",lat:51.05,lng:-114.07,detail:"Calgary, AB T2P 1J9, Canada"},
+  {city:"Ottawa",country:"Canada",region:"North America",flag:"🇨🇦",province:"ON",postal:"K1A 0A6",lat:45.42,lng:-75.70,detail:"Ottawa, ON K1A 0A6, Canada"},
+  {city:"Edmonton",country:"Canada",region:"North America",flag:"🇨🇦",province:"AB",postal:"T5J 0N3",lat:53.55,lng:-113.49,detail:"Edmonton, AB T5J 0N3, Canada"},
+  {city:"Winnipeg",country:"Canada",region:"North America",flag:"🇨🇦",province:"MB",postal:"R3C 0V8",lat:49.90,lng:-97.14,detail:"Winnipeg, MB R3C 0V8, Canada"},
+  {city:"Halifax",country:"Canada",region:"North America",flag:"🇨🇦",province:"NS",postal:"B3J 2L6",lat:44.65,lng:-63.58,detail:"Halifax, NS B3J 2L6, Canada"},
+  {city:"New York",country:"USA",region:"North America",flag:"🇺🇸",postal:"NY 10001",lat:40.71,lng:-74.01,detail:"New York, NY 10001, United States"},
+  {city:"Los Angeles",country:"USA",region:"North America",flag:"🇺🇸",postal:"CA 90001",lat:34.05,lng:-118.24,detail:"Los Angeles, CA 90001, United States"},
+  {city:"San Francisco",country:"USA",region:"North America",flag:"🇺🇸",postal:"CA 94102",lat:37.77,lng:-122.42,detail:"San Francisco, CA 94102, United States"},
+  {city:"Chicago",country:"USA",region:"North America",flag:"🇺🇸",postal:"IL 60601",lat:41.88,lng:-87.63,detail:"Chicago, IL 60601, United States"},
+  {city:"Seattle",country:"USA",region:"North America",flag:"🇺🇸",postal:"WA 98101",lat:47.61,lng:-122.33,detail:"Seattle, WA 98101, United States"},
+  {city:"Miami",country:"USA",region:"North America",flag:"🇺🇸",postal:"FL 33101",lat:25.77,lng:-80.19,detail:"Miami, FL 33101, United States"},
+  {city:"Dallas",country:"USA",region:"North America",flag:"🇺🇸",postal:"TX 75201",lat:32.78,lng:-96.80,detail:"Dallas, TX 75201, United States"},
+  {city:"Boston",country:"USA",region:"North America",flag:"🇺🇸",postal:"MA 02101",lat:42.36,lng:-71.06,detail:"Boston, MA 02101, United States"},
+  {city:"Atlanta",country:"USA",region:"North America",flag:"🇺🇸",postal:"GA 30301",lat:33.75,lng:-84.39,detail:"Atlanta, GA 30301, United States"},
+  {city:"Houston",country:"USA",region:"North America",flag:"🇺🇸",postal:"TX 77001",lat:29.76,lng:-95.37,detail:"Houston, TX 77001, United States"},
+  {city:"Mexico City",country:"Mexico",region:"North America",flag:"🇲🇽",postal:"06600",lat:19.43,lng:-99.13,detail:"Mexico City 06600, Mexico"},
+  {city:"Guadalajara",country:"Mexico",region:"North America",flag:"🇲🇽",postal:"44100",lat:20.66,lng:-103.35,detail:"Guadalajara 44100, Mexico"},
+  {city:"London",country:"United Kingdom",region:"Europe",flag:"🇬🇧",postal:"EC1A 1BB",lat:51.51,lng:-0.13,detail:"London EC1A 1BB, United Kingdom"},
+  {city:"Manchester",country:"United Kingdom",region:"Europe",flag:"🇬🇧",postal:"M1 1AE",lat:53.48,lng:-2.24,detail:"Manchester M1 1AE, United Kingdom"},
+  {city:"Birmingham",country:"United Kingdom",region:"Europe",flag:"🇬🇧",postal:"B1 1BB",lat:52.48,lng:-1.90,detail:"Birmingham B1 1BB, United Kingdom"},
+  {city:"Paris",country:"France",region:"Europe",flag:"🇫🇷",postal:"75001",lat:48.86,lng:2.35,detail:"Paris 75001, France"},
+  {city:"Lyon",country:"France",region:"Europe",flag:"🇫🇷",postal:"69001",lat:45.75,lng:4.83,detail:"Lyon 69001, France"},
+  {city:"Frankfurt",country:"Germany",region:"Europe",flag:"🇩🇪",postal:"60311",lat:50.11,lng:8.68,detail:"Frankfurt 60311, Germany"},
+  {city:"Berlin",country:"Germany",region:"Europe",flag:"🇩🇪",postal:"10115",lat:52.52,lng:13.40,detail:"Berlin 10115, Germany"},
+  {city:"Munich",country:"Germany",region:"Europe",flag:"🇩🇪",postal:"80331",lat:48.14,lng:11.58,detail:"Munich 80331, Germany"},
+  {city:"Hamburg",country:"Germany",region:"Europe",flag:"🇩🇪",postal:"20095",lat:53.55,lng:9.99,detail:"Hamburg 20095, Germany"},
+  {city:"Amsterdam",country:"Netherlands",region:"Europe",flag:"🇳🇱",postal:"1012 AB",lat:52.37,lng:4.90,detail:"Amsterdam 1012 AB, Netherlands"},
+  {city:"Rotterdam",country:"Netherlands",region:"Europe",flag:"🇳🇱",postal:"3011 AA",lat:51.92,lng:4.48,detail:"Rotterdam 3011 AA, Netherlands"},
+  {city:"Madrid",country:"Spain",region:"Europe",flag:"🇪🇸",postal:"28001",lat:40.42,lng:-3.70,detail:"Madrid 28001, Spain"},
+  {city:"Barcelona",country:"Spain",region:"Europe",flag:"🇪🇸",postal:"08001",lat:41.39,lng:2.15,detail:"Barcelona 08001, Spain"},
+  {city:"Milan",country:"Italy",region:"Europe",flag:"🇮🇹",postal:"20121",lat:45.46,lng:9.19,detail:"Milan 20121, Italy"},
+  {city:"Rome",country:"Italy",region:"Europe",flag:"🇮🇹",postal:"00100",lat:41.90,lng:12.49,detail:"Rome 00100, Italy"},
+  {city:"Zurich",country:"Switzerland",region:"Europe",flag:"🇨🇭",postal:"8001",lat:47.38,lng:8.54,detail:"Zurich 8001, Switzerland"},
+  {city:"Geneva",country:"Switzerland",region:"Europe",flag:"🇨🇭",postal:"1201",lat:46.20,lng:6.14,detail:"Geneva 1201, Switzerland"},
+  {city:"Brussels",country:"Belgium",region:"Europe",flag:"🇧🇪",postal:"1000",lat:50.85,lng:4.35,detail:"Brussels 1000, Belgium"},
+  {city:"Vienna",country:"Austria",region:"Europe",flag:"🇦🇹",postal:"1010",lat:48.21,lng:16.37,detail:"Vienna 1010, Austria"},
+  {city:"Warsaw",country:"Poland",region:"Europe",flag:"🇵🇱",postal:"00-001",lat:52.23,lng:21.01,detail:"Warsaw 00-001, Poland"},
+  {city:"Prague",country:"Czech Republic",region:"Europe",flag:"🇨🇿",postal:"110 00",lat:50.08,lng:14.44,detail:"Prague 110 00, Czech Republic"},
+  {city:"Stockholm",country:"Sweden",region:"Europe",flag:"🇸🇪",postal:"111 29",lat:59.33,lng:18.07,detail:"Stockholm 111 29, Sweden"},
+  {city:"Copenhagen",country:"Denmark",region:"Europe",flag:"🇩🇰",postal:"1050",lat:55.68,lng:12.57,detail:"Copenhagen 1050, Denmark"},
+  {city:"Oslo",country:"Norway",region:"Europe",flag:"🇳🇴",postal:"0010",lat:59.91,lng:10.75,detail:"Oslo 0010, Norway"},
+  {city:"Helsinki",country:"Finland",region:"Europe",flag:"🇫🇮",postal:"00100",lat:60.17,lng:24.94,detail:"Helsinki 00100, Finland"},
+  {city:"Lisbon",country:"Portugal",region:"Europe",flag:"🇵🇹",postal:"1100",lat:38.72,lng:-9.14,detail:"Lisbon 1100, Portugal"},
+  {city:"Dublin",country:"Ireland",region:"Europe",flag:"🇮🇪",postal:"D01",lat:53.33,lng:-6.25,detail:"Dublin D01, Ireland"},
+  {city:"Athens",country:"Greece",region:"Europe",flag:"🇬🇷",postal:"10431",lat:37.98,lng:23.73,detail:"Athens 10431, Greece"},
+  {city:"Budapest",country:"Hungary",region:"Europe",flag:"🇭🇺",postal:"1011",lat:47.50,lng:19.04,detail:"Budapest 1011, Hungary"},
+  {city:"Bucharest",country:"Romania",region:"Europe",flag:"🇷🇴",postal:"010011",lat:44.43,lng:26.10,detail:"Bucharest 010011, Romania"},
+  {city:"Tokyo",country:"Japan",region:"Asia Pacific",flag:"🇯🇵",postal:"100-0001",lat:35.68,lng:139.69,detail:"Tokyo 100-0001, Japan"},
+  {city:"Osaka",country:"Japan",region:"Asia Pacific",flag:"🇯🇵",postal:"530-0001",lat:34.69,lng:135.50,detail:"Osaka 530-0001, Japan"},
+  {city:"Nagoya",country:"Japan",region:"Asia Pacific",flag:"🇯🇵",postal:"460-0001",lat:35.18,lng:136.91,detail:"Nagoya 460-0001, Japan"},
+  {city:"Seoul",country:"South Korea",region:"Asia Pacific",flag:"🇰🇷",postal:"04524",lat:37.57,lng:126.98,detail:"Seoul 04524, South Korea"},
+  {city:"Busan",country:"South Korea",region:"Asia Pacific",flag:"🇰🇷",postal:"48941",lat:35.10,lng:129.03,detail:"Busan 48941, South Korea"},
+  {city:"Shanghai",country:"China",region:"Asia Pacific",flag:"🇨🇳",postal:"200001",lat:31.23,lng:121.47,detail:"Shanghai 200001, China"},
+  {city:"Beijing",country:"China",region:"Asia Pacific",flag:"🇨🇳",postal:"100000",lat:39.91,lng:116.39,detail:"Beijing 100000, China"},
+  {city:"Shenzhen",country:"China",region:"Asia Pacific",flag:"🇨🇳",postal:"518000",lat:22.54,lng:114.06,detail:"Shenzhen 518000, China"},
+  {city:"Guangzhou",country:"China",region:"Asia Pacific",flag:"🇨🇳",postal:"510000",lat:23.13,lng:113.26,detail:"Guangzhou 510000, China"},
+  {city:"Chengdu",country:"China",region:"Asia Pacific",flag:"🇨🇳",postal:"610000",lat:30.57,lng:104.07,detail:"Chengdu 610000, China"},
+  {city:"Hong Kong",country:"Hong Kong SAR",region:"Asia Pacific",flag:"🇭🇰",postal:"HK",lat:22.32,lng:114.17,detail:"Hong Kong SAR, China"},
+  {city:"Taipei",country:"Taiwan",region:"Asia Pacific",flag:"🇹🇼",postal:"100",lat:25.05,lng:121.56,detail:"Taipei 100, Taiwan"},
+  {city:"Singapore",country:"Singapore",region:"Asia Pacific",flag:"🇸🇬",postal:"018956",lat:1.35,lng:103.82,detail:"Singapore 018956"},
+  {city:"Kuala Lumpur",country:"Malaysia",region:"Asia Pacific",flag:"🇲🇾",postal:"50000",lat:3.14,lng:101.69,detail:"Kuala Lumpur 50000, Malaysia"},
+  {city:"Jakarta",country:"Indonesia",region:"Asia Pacific",flag:"🇮🇩",postal:"10110",lat:-6.21,lng:106.85,detail:"Jakarta 10110, Indonesia"},
+  {city:"Bangkok",country:"Thailand",region:"Asia Pacific",flag:"🇹🇭",postal:"10200",lat:13.75,lng:100.52,detail:"Bangkok 10200, Thailand"},
+  {city:"Ho Chi Minh City",country:"Vietnam",region:"Asia Pacific",flag:"🇻🇳",postal:"70000",lat:10.82,lng:106.63,detail:"Ho Chi Minh City 70000, Vietnam"},
+  {city:"Hanoi",country:"Vietnam",region:"Asia Pacific",flag:"🇻🇳",postal:"10000",lat:21.03,lng:105.85,detail:"Hanoi 10000, Vietnam"},
+  {city:"Manila",country:"Philippines",region:"Asia Pacific",flag:"🇵🇭",postal:"1000",lat:14.60,lng:120.98,detail:"Manila 1000, Philippines"},
+  {city:"Sydney",country:"Australia",region:"Asia Pacific",flag:"🇦🇺",postal:"NSW 2000",lat:-33.87,lng:151.21,detail:"Sydney NSW 2000, Australia"},
+  {city:"Melbourne",country:"Australia",region:"Asia Pacific",flag:"🇦🇺",postal:"VIC 3000",lat:-37.81,lng:144.96,detail:"Melbourne VIC 3000, Australia"},
+  {city:"Brisbane",country:"Australia",region:"Asia Pacific",flag:"🇦🇺",postal:"QLD 4000",lat:-27.47,lng:153.02,detail:"Brisbane QLD 4000, Australia"},
+  {city:"Perth",country:"Australia",region:"Asia Pacific",flag:"🇦🇺",postal:"WA 6000",lat:-31.95,lng:115.86,detail:"Perth WA 6000, Australia"},
+  {city:"Auckland",country:"New Zealand",region:"Asia Pacific",flag:"🇳🇿",postal:"1010",lat:-36.87,lng:174.77,detail:"Auckland 1010, New Zealand"},
+  {city:"Mumbai",country:"India",region:"South Asia",flag:"🇮🇳",postal:"400001",lat:19.08,lng:72.88,detail:"Mumbai 400001, India"},
+  {city:"Delhi",country:"India",region:"South Asia",flag:"🇮🇳",postal:"110001",lat:28.63,lng:77.22,detail:"Delhi 110001, India"},
+  {city:"Bangalore",country:"India",region:"South Asia",flag:"🇮🇳",postal:"560001",lat:12.97,lng:77.59,detail:"Bangalore 560001, India"},
+  {city:"Chennai",country:"India",region:"South Asia",flag:"🇮🇳",postal:"600001",lat:13.08,lng:80.27,detail:"Chennai 600001, India"},
+  {city:"Hyderabad",country:"India",region:"South Asia",flag:"🇮🇳",postal:"500001",lat:17.38,lng:78.47,detail:"Hyderabad 500001, India"},
+  {city:"Karachi",country:"Pakistan",region:"South Asia",flag:"🇵🇰",postal:"74200",lat:24.86,lng:67.01,detail:"Karachi 74200, Pakistan"},
+  {city:"Colombo",country:"Sri Lanka",region:"South Asia",flag:"🇱🇰",postal:"00100",lat:6.93,lng:79.85,detail:"Colombo 00100, Sri Lanka"},
+  {city:"Dubai",country:"UAE",region:"Middle East",flag:"🇦🇪",postal:"00000",lat:25.20,lng:55.27,detail:"Dubai, United Arab Emirates"},
+  {city:"Abu Dhabi",country:"UAE",region:"Middle East",flag:"🇦🇪",postal:"00000",lat:24.45,lng:54.38,detail:"Abu Dhabi, United Arab Emirates"},
+  {city:"Riyadh",country:"Saudi Arabia",region:"Middle East",flag:"🇸🇦",postal:"11564",lat:24.69,lng:46.72,detail:"Riyadh 11564, Saudi Arabia"},
+  {city:"Jeddah",country:"Saudi Arabia",region:"Middle East",flag:"🇸🇦",postal:"21441",lat:21.49,lng:39.19,detail:"Jeddah 21441, Saudi Arabia"},
+  {city:"Doha",country:"Qatar",region:"Middle East",flag:"🇶🇦",postal:"00000",lat:25.29,lng:51.53,detail:"Doha, Qatar"},
+  {city:"Kuwait City",country:"Kuwait",region:"Middle East",flag:"🇰🇼",postal:"13001",lat:29.37,lng:47.98,detail:"Kuwait City 13001, Kuwait"},
+  {city:"Tel Aviv",country:"Israel",region:"Middle East",flag:"🇮🇱",postal:"61000",lat:32.07,lng:34.79,detail:"Tel Aviv 61000, Israel"},
+  {city:"Istanbul",country:"Turkey",region:"Middle East",flag:"🇹🇷",postal:"34000",lat:41.01,lng:28.95,detail:"Istanbul 34000, Turkey"},
+  {city:"Amman",country:"Jordan",region:"Middle East",flag:"🇯🇴",postal:"11118",lat:31.95,lng:35.93,detail:"Amman 11118, Jordan"},
+  {city:"Cairo",country:"Egypt",region:"Africa",flag:"🇪🇬",postal:"11511",lat:30.04,lng:31.24,detail:"Cairo 11511, Egypt"},
+  {city:"Lagos",country:"Nigeria",region:"Africa",flag:"🇳🇬",postal:"100001",lat:6.45,lng:3.40,detail:"Lagos 100001, Nigeria"},
+  {city:"Nairobi",country:"Kenya",region:"Africa",flag:"🇰🇪",postal:"00100",lat:-1.29,lng:36.82,detail:"Nairobi 00100, Kenya"},
+  {city:"Johannesburg",country:"South Africa",region:"Africa",flag:"🇿🇦",postal:"2001",lat:-26.20,lng:28.04,detail:"Johannesburg 2001, South Africa"},
+  {city:"Cape Town",country:"South Africa",region:"Africa",flag:"🇿🇦",postal:"8001",lat:-33.93,lng:18.42,detail:"Cape Town 8001, South Africa"},
+  {city:"Casablanca",country:"Morocco",region:"Africa",flag:"🇲🇦",postal:"20000",lat:33.59,lng:-7.62,detail:"Casablanca 20000, Morocco"},
+  {city:"Accra",country:"Ghana",region:"Africa",flag:"🇬🇭",postal:"GA",lat:5.56,lng:-0.20,detail:"Accra, Ghana"},
+  {city:"Addis Ababa",country:"Ethiopia",region:"Africa",flag:"🇪🇹",postal:"1000",lat:9.03,lng:38.74,detail:"Addis Ababa 1000, Ethiopia"},
+  {city:"Dar es Salaam",country:"Tanzania",region:"Africa",flag:"🇹🇿",postal:"11101",lat:-6.79,lng:39.21,detail:"Dar es Salaam 11101, Tanzania"},
+  {city:"Sao Paulo",country:"Brazil",region:"Latin America",flag:"🇧🇷",postal:"01310-100",lat:-23.55,lng:-46.63,detail:"Sao Paulo 01310-100, Brazil"},
+  {city:"Rio de Janeiro",country:"Brazil",region:"Latin America",flag:"🇧🇷",postal:"20040-020",lat:-22.91,lng:-43.17,detail:"Rio de Janeiro 20040-020, Brazil"},
+  {city:"Buenos Aires",country:"Argentina",region:"Latin America",flag:"🇦🇷",postal:"C1000",lat:-34.60,lng:-58.38,detail:"Buenos Aires C1000, Argentina"},
+  {city:"Santiago",country:"Chile",region:"Latin America",flag:"🇨🇱",postal:"8320000",lat:-33.45,lng:-70.67,detail:"Santiago 8320000, Chile"},
+  {city:"Lima",country:"Peru",region:"Latin America",flag:"🇵🇪",postal:"15001",lat:-12.05,lng:-77.04,detail:"Lima 15001, Peru"},
+  {city:"Bogota",country:"Colombia",region:"Latin America",flag:"🇨🇴",postal:"110111",lat:4.71,lng:-74.07,detail:"Bogota 110111, Colombia"},
+  {city:"Moscow",country:"Russia",region:"Eastern Europe & CIS",flag:"🇷🇺",postal:"101000",lat:55.75,lng:37.62,detail:"Moscow 101000, Russia"},
+  {city:"St. Petersburg",country:"Russia",region:"Eastern Europe & CIS",flag:"🇷🇺",postal:"190000",lat:59.94,lng:30.32,detail:"St. Petersburg 190000, Russia"},
+  {city:"Kyiv",country:"Ukraine",region:"Eastern Europe & CIS",flag:"🇺🇦",postal:"01001",lat:50.45,lng:30.52,detail:"Kyiv 01001, Ukraine"},
+  {city:"Almaty",country:"Kazakhstan",region:"Eastern Europe & CIS",flag:"🇰🇿",postal:"050000",lat:43.24,lng:76.89,detail:"Almaty 050000, Kazakhstan"},
+];
+
+let rzPriority='Balanced';
+let sugTimers={origin:null,dest:null};
+let originCity=null,destCity=null;
+let projection=null;
+
+(function init(){
+  const t=new Date();
+  const pad=n=>String(n).padStart(2,'0');
+  document.getElementById('rz-deadline').min=`${t.getFullYear()}-${pad(t.getMonth()+1)}-${pad(t.getDate())}`;
+  document.addEventListener('click',e=>{
+    if(!e.target.closest('#orig-field'))document.getElementById('sug-origin').style.display='none';
+    if(!e.target.closest('#dest-field'))document.getElementById('sug-dest').style.display='none';
+  });
+  loadMap();
+})();
+
+function loadMap(){
+  const W=960,H=480;
+  projection=d3.geoNaturalEarth1().scale(153).translate([W/2,H/2]);
+  const path=d3.geoPath().projection(projection);
+  d3.json('https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json').then(world=>{
+    const countries=topojson.feature(world,world.objects.countries);
+    d3.select('#rz-countries').selectAll('path')
+      .data(countries.features).join('path')
+      .attr('d',path).attr('fill','#1a2e1a').attr('stroke','#2a3e2a').attr('stroke-width','0.5');
+  }).catch(()=>{
+    d3.select('#rz-countries').append('text')
+      .attr('x',480).attr('y',240).attr('text-anchor','middle')
+      .attr('fill','#333').attr('font-size','14')
+      .text('Map requires internet connection');
+  });
+}
+
+function updateRoute(){
+  const layer=d3.select('#rz-route');
+  layer.selectAll('*').remove();
+  if(!originCity||!destCity||!projection)return;
+  const [x1,y1]=projection([originCity.lng,originCity.lat]);
+  const [x2,y2]=projection([destCity.lng,destCity.lat]);
+  const mx=(x1+x2)/2;
+  const my=(y1+y2)/2-Math.abs(x2-x1)*0.35-30;
+  layer.append('defs').html(`<marker id="rzarrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#44ff44"/></marker>`);
+  layer.append('path').attr('d',`M${x1},${y1} Q${mx},${my} ${x2},${y2}`)
+    .attr('stroke','#44ff44').attr('stroke-width','1.5').attr('fill','none')
+    .attr('stroke-dasharray','5,3').attr('marker-end','url(#rzarrow)').attr('opacity','0.9');
+  layer.append('circle').attr('cx',x1).attr('cy',y1).attr('r',5).attr('fill','#44ff44');
+  layer.append('circle').attr('cx',x2).attr('cy',y2).attr('r',5).attr('fill','#ff4444');
+  const o1=y1>300?16:-12, o2=y2>300?16:-12;
+  layer.append('text').attr('x',x1).attr('y',y1+o1).attr('text-anchor','middle').attr('fill','#44ff44').attr('font-size','10').attr('font-family','Rajdhani,sans-serif').attr('letter-spacing','0.8').text(originCity.city.toUpperCase());
+  layer.append('text').attr('x',x2).attr('y',y2+o2).attr('text-anchor','middle').attr('fill','#ff5555').attr('font-size','10').attr('font-family','Rajdhani,sans-serif').attr('letter-spacing','0.8').text(destCity.city.toUpperCase());
+  document.getElementById('rz-map-hint').textContent=originCity.city+' → '+destCity.city;
+}
+
+function rzPrio(el){document.querySelectorAll('.rz-prio').forEach(e=>e.classList.remove('active'));el.classList.add('active');rzPriority=el.dataset.p;}
+
+function rzSuggest(field,val){
+  const id=field==='origin'?'sug-origin':'sug-dest';
+  const box=document.getElementById(id);
+  clearTimeout(sugTimers[field]);
+  if(val.length<2){box.style.display='none';return;}
+  sugTimers[field]=setTimeout(()=>{
+    const q=val.toLowerCase();
+    const matches=CITIES.filter(c=>
+      c.city.toLowerCase().includes(q)||c.country.toLowerCase().includes(q)||
+      c.region.toLowerCase().includes(q)||(c.province&&c.province.toLowerCase().includes(q))||
+      c.postal.toLowerCase().includes(q)
+    ).slice(0,8);
+    if(!matches.length){box.style.display='none';return;}
+    box.innerHTML=matches.map(c=>`<div class="rz-sug-item" onclick="rzPickSug('${field}',${CITIES.indexOf(c)})">
+      <span class="rz-sug-flag">${c.flag}</span>
+      <div><div class="rz-sug-city">${c.city}${c.province?', '+c.province:''}, ${c.country}</div>
+      <div class="rz-sug-detail">${c.postal}</div>
+      <div class="rz-sug-region">${c.region}</div></div>
+    </div>`).join('');
+    box.style.display='block';
+  },160);
+}
+
+function rzPickSug(field,idx){
+  const c=CITIES[idx];
+  document.getElementById(field==='origin'?'rz-origin':'rz-dest').value=c.detail;
+  document.getElementById(field==='origin'?'sug-origin':'sug-dest').style.display='none';
+  if(field==='origin')originCity=c; else destCity=c;
+  updateRoute();
+}
+
+function rzFillWeight(){
+  const sel=document.getElementById('rz-product');
+  const opt=sel.options[sel.selectedIndex];
+  const w=parseFloat(opt.dataset.w);
+  const pill=document.getElementById('rz-wpill');
+  const qty=parseFloat(document.getElementById('rz-qty').value)||1;
+  if(w){
+    document.getElementById('rz-wtxt').textContent='Unit weight: '+(w<1?(w*1000).toFixed(0)+'g':w+'kg');
+    pill.style.display='inline-flex';
+    document.getElementById('rz-weight').value=(w*qty).toFixed(3);
+  }else{pill.style.display='none';document.getElementById('rz-weight').value='';}
+}
+
+function rzUpdateWeight(){
+  const sel=document.getElementById('rz-product');
+  const opt=sel.options[sel.selectedIndex];
+  const w=parseFloat(opt.dataset.w);
+  const qty=parseFloat(document.getElementById('rz-qty').value)||1;
+  if(w)document.getElementById('rz-weight').value=(w*qty).toFixed(3);
+}
+
+function rzReset(){
+  document.getElementById('rz-results').classList.remove('on');
+  document.getElementById('rz-form').style.display='';
+}
+
+function getCarrierBadge(carrier){
+  const c=carrier.toLowerCase();
+  if(c.includes('fedex'))return'<span class="rz-carrier-badge badge-fedex">FedEx</span>';
+  if(c.includes('ups'))return'<span class="rz-carrier-badge badge-ups">UPS</span>';
+  if(c.includes('dhl'))return'<span class="rz-carrier-badge badge-dhl">DHL</span>';
+  return'';
+}
+
+function getModeStyle(mode){
+  const m=mode.toLowerCase();
+  if(m.includes('air')||m.includes('express')||m.includes('priority'))return{cls:'d-air',icon:'ti-plane'};
+  if(m.includes('sea')||m.includes('ocean')||m.includes('freight'))return{cls:'d-sea',icon:'ti-anchor'};
+  if(m.includes('rail')||m.includes('train'))return{cls:'d-land',icon:'ti-train'};
+  if(m.includes('truck')||m.includes('road')||m.includes('ground'))return{cls:'d-land',icon:'ti-truck'};
+  return{cls:'d-multi',icon:'ti-route'};
+}
+
+async function rzRun(){
+  const origin=document.getElementById('rz-origin').value.trim();
+  const dest=document.getElementById('rz-dest').value.trim();
+  const deadline=document.getElementById('rz-deadline').value;
+  const product=document.getElementById('rz-product').value;
+  const qty=document.getElementById('rz-qty').value;
+  const weight=document.getElementById('rz-weight').value;
+  const err=document.getElementById('rz-err');
+
+if(!origin||!dest||!deadline||!product||!qty||!weight){
+    err.textContent='All fields are required. Please complete the form.';err.classList.add('on');return;
+  }
+  err.classList.remove('on');
+  document.getElementById('rz-form').style.display='none';
+  const loader=document.getElementById('rz-loader');
+  loader.classList.add('on');
+  const msgs=['Querying FedEx international rates...','Checking UPS Worldwide tariffs...','Fetching DHL Express pricing...','Comparing carrier transit times...','Scoring reliability & feasibility...'];
+  let mi=0;const lt=document.getElementById('rz-ltxt');
+  const ti=setInterval(()=>{mi=(mi+1)%msgs.length;lt.textContent=msgs[mi];},900);
+  const days=Math.ceil((new Date(deadline)-new Date())/86400000);
+
+  const prompt=`You are a senior logistics analyst for Razer Inc. Analyze this shipment and return ONLY a raw JSON object — no markdown, no backticks, no text before or after.
+
+SHIPMENT:
+- Origin: ${origin}
+- Destination: ${dest}
+- Product: ${product} (consumer electronics)
+- Quantity: ${qty} units
+- Total weight: ${weight} kg
+- Deadline: ${deadline} (${days} days from today)
+- Priority: ${rzPriority}
+
+Generate exactly 3 options using ONLY FedEx, UPS, or DHL. Use realistic published rate benchmarks. Factor in electronics surcharges, fuel surcharges (20-25% air, 10-15% ocean), dimensional weight, and customs clearance time.
+
+Return: {"routes":[{"carrier":"string","mode":"string","service_code":"string","cost_usd":number,"transit_days":number,"eta":"string","reliability":number,"speed_score":number,"cost_score":number,"feasible":boolean,"recommended":boolean,"notes":"string"}],"reasoning":"string"}
+
+One recommended:true. feasible:false if misses deadline. ETA as "Jun 22, 2026".`;
+
+  try{
+    const res=await fetch('/.netlify/functions/proxy',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:1200,messages:[{role:'user',content:prompt}]})
+    });
+    const data=await res.json();
+    if(data.error){throw new Error(data.error.message);}
+    const raw=data.content.map(c=>c.text||'').join('').replace(/```json|```/g,'').trim();
+    const parsed=JSON.parse(raw);
+    clearInterval(ti);loader.classList.remove('on');
+    rzRender(parsed);
+  }catch(e){
+    clearInterval(ti);loader.classList.remove('on');
+    document.getElementById('rz-form').style.display='';
+    err.textContent='Error: '+e.message+'. Please try again.';
+    err.classList.add('on');
+  }
+}
+
+function rzRender(data){
+  const container=document.getElementById('rz-cards');
+  container.innerHTML='';
+  const sorted=[...data.routes].sort((a,b)=>(b.recommended?1:0)-(a.recommended?1:0));
+  sorted.forEach(r=>{
+    const{cls,icon}=getModeStyle(r.mode);
+    const etaColor=r.feasible?'#bbb':'#ff5555';
+    const cost='$'+r.cost_usd.toLocaleString();
+    const badge=getCarrierBadge(r.carrier);
+    const card=document.createElement('div');
+    card.className='rz-card'+(r.recommended?' rec':'');
+    card.innerHTML=`
+      ${r.recommended?'<div class="rz-rec-pill">Recommended</div>':''}
+      <div class="rz-card-top">
+        <div class="rz-mode-row">
+          <div class="rz-mode-dot ${cls}"><i class="ti ${icon}" aria-hidden="true"></i></div>
+          <div>
+            <div class="rz-mname">${r.carrier}</div>
+            <div style="display:flex;align-items:center;gap:6px;margin-top:3px">${badge}<span style="font-size:11px;color:#333;font-family:'Rajdhani',sans-serif">${r.mode}</span></div>
+          </div>
+        </div>
+        <div style="text-align:right">
+          <div class="rz-cost-val">${cost}</div>
+          <div class="rz-cost-lbl">Est. total</div>
+        </div>
+      </div>
+      <div class="rz-stats">
+        <div class="rz-stat"><div class="rz-stat-lbl">Transit</div><div class="rz-stat-val">${r.transit_days}d</div></div>
+        <div class="rz-stat"><div class="rz-stat-lbl">ETA</div><div class="rz-stat-val" style="color:${etaColor};font-size:11px">${r.eta}</div></div>
+        <div class="rz-stat"><div class="rz-stat-lbl">Reliability</div><div class="rz-stat-val">${r.reliability}%</div></div>
+      </div>
+      <div class="rz-bars">
+        <div class="rz-brow"><span class="rz-blbl">Speed</span><div class="rz-btrack"><div class="rz-bfill" style="width:${r.speed_score}%"></div></div><span class="rz-bnum">${r.speed_score}</span></div>
+        <div class="rz-brow"><span class="rz-blbl">Cost eff.</span><div class="rz-btrack"><div class="rz-bfill" style="width:${r.cost_score}%"></div></div><span class="rz-bnum">${r.cost_score}</span></div>
+        <div class="rz-brow"><span class="rz-blbl">Reliability</span><div class="rz-btrack"><div class="rz-bfill" style="width:${r.reliability}%"></div></div><span class="rz-bnum">${r.reliability}</span></div>
+      </div>
+      <div class="rz-note"><i class="ti ti-info-circle" style="font-size:13px;vertical-align:-1px;margin-right:5px;color:#44ff44"></i>${r.notes}</div>
+    `;
+    container.appendChild(card);
+  });
+  document.getElementById('rz-reasoning').innerHTML=`<div class="rz-r-lbl">Atlas reasoning</div><div class="rz-r-txt">${data.reasoning}</div>`;
+  document.getElementById('rz-results').classList.add('on');
+}
+</script>
+</body>
+</html>
