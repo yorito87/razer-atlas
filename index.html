@@ -286,6 +286,7 @@ let geoTimers={origin:null,dest:null};
 
 let rzPriority='Balanced';
 let projection=null;
+let mapZoom=null;
 
 (function init(){
   const t=new Date();
@@ -301,65 +302,73 @@ function loadMap(){
   const path=d3.geoPath().projection(projection);
   const svg=d3.select('#rz-mapsvg');
 
+  // Remove inline groups, build inside a single zoom container
+  svg.select('#rz-countries').remove();
+  svg.select('#rz-route').remove();
+
   const zoomG=svg.append('g').attr('id','rz-zoom-g');
-  d3.select('#rz-countries').remove();
-  d3.select('#rz-route').remove();
   zoomG.append('g').attr('id','rz-countries');
   zoomG.append('g').attr('id','rz-route');
 
-  const zoom=d3.zoom()
+  mapZoom=d3.zoom()
     .scaleExtent([1,12])
     .on('zoom',function(event){
       zoomG.attr('transform',event.transform);
     });
 
-  svg.call(zoom);
-
+  svg.call(mapZoom);
   svg.on('dblclick.zoom',null);
 
   d3.select('#rz-zoom-in').on('click',function(){
-    svg.transition().duration(300).call(zoom.scaleBy,1.6);
+    svg.transition().duration(300).call(mapZoom.scaleBy,1.6);
   });
   d3.select('#rz-zoom-out').on('click',function(){
-    svg.transition().duration(300).call(zoom.scaleBy,0.625);
+    svg.transition().duration(300).call(mapZoom.scaleBy,0.625);
   });
   d3.select('#rz-zoom-reset').on('click',function(){
-    svg.transition().duration(300).call(zoom.transform,d3.zoomIdentity);
+    svg.transition().duration(300).call(mapZoom.transform,d3.zoomIdentity);
   });
 
   d3.json('https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json').then(world=>{
     const countries=topojson.feature(world,world.objects.countries);
     d3.select('#rz-countries').selectAll('path')
       .data(countries.features).join('path')
-      .attr('d',path).attr('fill','#1a2e1a').attr('stroke','#2a3e2a').attr('stroke-width','0.5');
+      .attr('d',path)
+      .attr('fill','#1a2e1a')
+      .attr('stroke','#2a3e2a')
+      .attr('stroke-width','0.5');
   }).catch(()=>{
     d3.select('#rz-countries').append('text')
-      .attr('x',480).attr('y',240).attr('text-anchor','middle')
-      .attr('fill','#333').attr('font-size','14')
+      .attr('x',480).attr('y',240)
+      .attr('text-anchor','middle')
+      .attr('fill','#333')
+      .attr('font-size','14')
       .text('Map requires internet connection');
   });
 }
 
 function updateRoute(){
-  const layer=d3.select('#rz-route');
-  layer.selectAll('*').remove();
   if(!originCity||!destCity||!projection)return;
+  const routeLayer=d3.select('#rz-route');
+  routeLayer.selectAll('*').remove();
+
   const [x1,y1]=projection([originCity.lng,originCity.lat]);
   const [x2,y2]=projection([destCity.lng,destCity.lat]);
   const mx=(x1+x2)/2;
   const my=(y1+y2)/2-Math.abs(x2-x1)*0.35-30;
-  layer.append('defs').html(`<marker id="rzarrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#44ff44"/></marker>`);
-  layer.append('path').attr('d',`M${x1},${y1} Q${mx},${my} ${x2},${y2}`)
+
+  routeLayer.append('defs').html('<marker id="rzarrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#44ff44"/></marker>');
+  routeLayer.append('path')
+    .attr('d','M'+x1+','+y1+' Q'+mx+','+my+' '+x2+','+y2)
     .attr('stroke','#44ff44').attr('stroke-width','1.5').attr('fill','none')
     .attr('stroke-dasharray','5,3').attr('marker-end','url(#rzarrow)').attr('opacity','0.9');
-  layer.append('circle').attr('cx',x1).attr('cy',y1).attr('r',5).attr('fill','#44ff44');
-  layer.append('circle').attr('cx',x2).attr('cy',y2).attr('r',5).attr('fill','#ff4444');
+  routeLayer.append('circle').attr('cx',x1).attr('cy',y1).attr('r',5).attr('fill','#44ff44');
+  routeLayer.append('circle').attr('cx',x2).attr('cy',y2).attr('r',5).attr('fill','#ff4444');
   const o1=y1>300?16:-12, o2=y2>300?16:-12;
-  layer.append('text').attr('x',x1).attr('y',y1+o1).attr('text-anchor','middle').attr('fill','#44ff44').attr('font-size','10').attr('font-family','Rajdhani,sans-serif').attr('letter-spacing','0.8').text(originCity.city.toUpperCase());
-  layer.append('text').attr('x',x2).attr('y',y2+o2).attr('text-anchor','middle').attr('fill','#ff5555').attr('font-size','10').attr('font-family','Rajdhani,sans-serif').attr('letter-spacing','0.8').text(destCity.city.toUpperCase());
+  routeLayer.append('text').attr('x',x1).attr('y',y1+o1).attr('text-anchor','middle').attr('fill','#44ff44').attr('font-size','10').attr('font-family','Rajdhani,sans-serif').attr('letter-spacing','0.8').text(originCity.city.toUpperCase());
+  routeLayer.append('text').attr('x',x2).attr('y',y2+o2).attr('text-anchor','middle').attr('fill','#ff5555').attr('font-size','10').attr('font-family','Rajdhani,sans-serif').attr('letter-spacing','0.8').text(destCity.city.toUpperCase());
   document.getElementById('rz-map-hint').textContent=originCity.city+' → '+destCity.city;
 }
-
 function rzPrio(el){document.querySelectorAll('.rz-prio').forEach(e=>e.classList.remove('active'));el.classList.add('active');rzPriority=el.dataset.p;}
 
 
