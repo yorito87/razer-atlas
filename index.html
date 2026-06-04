@@ -125,11 +125,19 @@ body{font-family:'Barlow',sans-serif;background:#050505;min-height:100vh;display
           <div class="rz-minimap-lbl">Route minimap</div>
           <div class="rz-minimap-hint" id="rz-map-hint">Select origin & destination to preview route</div>
         </div>
-        <svg id="rz-mapsvg" viewBox="0 0 960 480" preserveAspectRatio="xMidYMid meet">
-          <rect width="960" height="480" fill="#0a0f0a"/>
-          <g id="rz-countries"></g>
-          <g id="rz-route"></g>
-        </svg>
+        <div style="position:relative">
+          <svg id="rz-mapsvg" viewBox="0 0 960 480" preserveAspectRatio="xMidYMid meet" style="cursor:grab">
+            <rect width="960" height="480" fill="#0a0f0a"/>
+            <g id="rz-countries"></g>
+            <g id="rz-route"></g>
+          </svg>
+          <div style="position:absolute;bottom:8px;right:8px;display:flex;flex-direction:column;gap:3px">
+            <button id="rz-zoom-in" style="width:24px;height:24px;background:#111;border:1px solid #2a2a2a;border-radius:3px;color:#44ff44;font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;line-height:1;padding:0">+</button>
+            <button id="rz-zoom-out" style="width:24px;height:24px;background:#111;border:1px solid #2a2a2a;border-radius:3px;color:#44ff44;font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;line-height:1;padding:0">−</button>
+            <button id="rz-zoom-reset" style="width:24px;height:24px;background:#111;border:1px solid #2a2a2a;border-radius:3px;color:#555;font-size:9px;cursor:pointer;display:flex;align-items:center;justify-content:center;line-height:1;padding:0;font-family:Rajdhani,sans-serif;letter-spacing:0.5px">FIT</button>
+          </div>
+          <div style="position:absolute;bottom:8px;left:8px;font-size:9px;color:#2a2a2a;font-family:Rajdhani,sans-serif;letter-spacing:1px">SCROLL TO ZOOM · DRAG TO PAN</div>
+        </div>
       </div>
 
       <!-- ADDRESSES -->
@@ -138,13 +146,11 @@ body{font-family:'Barlow',sans-serif;background:#050505;min-height:100vh;display
         <div class="rz-grid">
           <div class="rz-field full" id="orig-field">
             <div class="rz-lbl">Origin address</div>
-            <input class="rz-inp" id="rz-origin" type="text" placeholder="Type any city worldwide..." autocomplete="off" oninput="rzSuggest('origin',this.value)">
-            <div class="rz-autosug" id="sug-origin" style="display:none"></div>
+            <input class="rz-inp" id="rz-origin" type="text" placeholder="e.g. Vancouver BC, Tokyo Japan, SW1A 1AA London..." autocomplete="off">
           </div>
           <div class="rz-field full" id="dest-field">
             <div class="rz-lbl">Destination address</div>
-            <input class="rz-inp" id="rz-dest" type="text" placeholder="Type any city worldwide..." autocomplete="off" oninput="rzSuggest('dest',this.value)">
-            <div class="rz-autosug" id="sug-dest" style="display:none"></div>
+            <input class="rz-inp" id="rz-dest" type="text" placeholder="e.g. Singapore 018956, Dubai UAE, 10001 New York..." autocomplete="off">
           </div>
         </div>
       </div>
@@ -274,131 +280,18 @@ body{font-family:'Barlow',sans-serif;background:#050505;min-height:100vh;display
 // API key handled server-side by Netlify function
 // ─────────────────────────────────────────────
 
-const CITIES=[
-  {city:"Toronto",country:"Canada",region:"North America",flag:"🇨🇦",province:"ON",postal:"M5H 2N2",lat:43.65,lng:-79.38,detail:"Toronto, ON M5H 2N2, Canada"},
-  {city:"Vancouver",country:"Canada",region:"North America",flag:"🇨🇦",province:"BC",postal:"V6C 1S4",lat:49.28,lng:-123.12,detail:"Vancouver, BC V6C 1S4, Canada"},
-  {city:"Montreal",country:"Canada",region:"North America",flag:"🇨🇦",province:"QC",postal:"H2Y 1C6",lat:45.50,lng:-73.57,detail:"Montreal, QC H2Y 1C6, Canada"},
-  {city:"Calgary",country:"Canada",region:"North America",flag:"🇨🇦",province:"AB",postal:"T2P 1J9",lat:51.05,lng:-114.07,detail:"Calgary, AB T2P 1J9, Canada"},
-  {city:"Ottawa",country:"Canada",region:"North America",flag:"🇨🇦",province:"ON",postal:"K1A 0A6",lat:45.42,lng:-75.70,detail:"Ottawa, ON K1A 0A6, Canada"},
-  {city:"Edmonton",country:"Canada",region:"North America",flag:"🇨🇦",province:"AB",postal:"T5J 0N3",lat:53.55,lng:-113.49,detail:"Edmonton, AB T5J 0N3, Canada"},
-  {city:"Winnipeg",country:"Canada",region:"North America",flag:"🇨🇦",province:"MB",postal:"R3C 0V8",lat:49.90,lng:-97.14,detail:"Winnipeg, MB R3C 0V8, Canada"},
-  {city:"Halifax",country:"Canada",region:"North America",flag:"🇨🇦",province:"NS",postal:"B3J 2L6",lat:44.65,lng:-63.58,detail:"Halifax, NS B3J 2L6, Canada"},
-  {city:"New York",country:"USA",region:"North America",flag:"🇺🇸",postal:"NY 10001",lat:40.71,lng:-74.01,detail:"New York, NY 10001, United States"},
-  {city:"Los Angeles",country:"USA",region:"North America",flag:"🇺🇸",postal:"CA 90001",lat:34.05,lng:-118.24,detail:"Los Angeles, CA 90001, United States"},
-  {city:"San Francisco",country:"USA",region:"North America",flag:"🇺🇸",postal:"CA 94102",lat:37.77,lng:-122.42,detail:"San Francisco, CA 94102, United States"},
-  {city:"Chicago",country:"USA",region:"North America",flag:"🇺🇸",postal:"IL 60601",lat:41.88,lng:-87.63,detail:"Chicago, IL 60601, United States"},
-  {city:"Seattle",country:"USA",region:"North America",flag:"🇺🇸",postal:"WA 98101",lat:47.61,lng:-122.33,detail:"Seattle, WA 98101, United States"},
-  {city:"Miami",country:"USA",region:"North America",flag:"🇺🇸",postal:"FL 33101",lat:25.77,lng:-80.19,detail:"Miami, FL 33101, United States"},
-  {city:"Dallas",country:"USA",region:"North America",flag:"🇺🇸",postal:"TX 75201",lat:32.78,lng:-96.80,detail:"Dallas, TX 75201, United States"},
-  {city:"Boston",country:"USA",region:"North America",flag:"🇺🇸",postal:"MA 02101",lat:42.36,lng:-71.06,detail:"Boston, MA 02101, United States"},
-  {city:"Atlanta",country:"USA",region:"North America",flag:"🇺🇸",postal:"GA 30301",lat:33.75,lng:-84.39,detail:"Atlanta, GA 30301, United States"},
-  {city:"Houston",country:"USA",region:"North America",flag:"🇺🇸",postal:"TX 77001",lat:29.76,lng:-95.37,detail:"Houston, TX 77001, United States"},
-  {city:"Mexico City",country:"Mexico",region:"North America",flag:"🇲🇽",postal:"06600",lat:19.43,lng:-99.13,detail:"Mexico City 06600, Mexico"},
-  {city:"Guadalajara",country:"Mexico",region:"North America",flag:"🇲🇽",postal:"44100",lat:20.66,lng:-103.35,detail:"Guadalajara 44100, Mexico"},
-  {city:"London",country:"United Kingdom",region:"Europe",flag:"🇬🇧",postal:"EC1A 1BB",lat:51.51,lng:-0.13,detail:"London EC1A 1BB, United Kingdom"},
-  {city:"Manchester",country:"United Kingdom",region:"Europe",flag:"🇬🇧",postal:"M1 1AE",lat:53.48,lng:-2.24,detail:"Manchester M1 1AE, United Kingdom"},
-  {city:"Birmingham",country:"United Kingdom",region:"Europe",flag:"🇬🇧",postal:"B1 1BB",lat:52.48,lng:-1.90,detail:"Birmingham B1 1BB, United Kingdom"},
-  {city:"Paris",country:"France",region:"Europe",flag:"🇫🇷",postal:"75001",lat:48.86,lng:2.35,detail:"Paris 75001, France"},
-  {city:"Lyon",country:"France",region:"Europe",flag:"🇫🇷",postal:"69001",lat:45.75,lng:4.83,detail:"Lyon 69001, France"},
-  {city:"Frankfurt",country:"Germany",region:"Europe",flag:"🇩🇪",postal:"60311",lat:50.11,lng:8.68,detail:"Frankfurt 60311, Germany"},
-  {city:"Berlin",country:"Germany",region:"Europe",flag:"🇩🇪",postal:"10115",lat:52.52,lng:13.40,detail:"Berlin 10115, Germany"},
-  {city:"Munich",country:"Germany",region:"Europe",flag:"🇩🇪",postal:"80331",lat:48.14,lng:11.58,detail:"Munich 80331, Germany"},
-  {city:"Hamburg",country:"Germany",region:"Europe",flag:"🇩🇪",postal:"20095",lat:53.55,lng:9.99,detail:"Hamburg 20095, Germany"},
-  {city:"Amsterdam",country:"Netherlands",region:"Europe",flag:"🇳🇱",postal:"1012 AB",lat:52.37,lng:4.90,detail:"Amsterdam 1012 AB, Netherlands"},
-  {city:"Rotterdam",country:"Netherlands",region:"Europe",flag:"🇳🇱",postal:"3011 AA",lat:51.92,lng:4.48,detail:"Rotterdam 3011 AA, Netherlands"},
-  {city:"Madrid",country:"Spain",region:"Europe",flag:"🇪🇸",postal:"28001",lat:40.42,lng:-3.70,detail:"Madrid 28001, Spain"},
-  {city:"Barcelona",country:"Spain",region:"Europe",flag:"🇪🇸",postal:"08001",lat:41.39,lng:2.15,detail:"Barcelona 08001, Spain"},
-  {city:"Milan",country:"Italy",region:"Europe",flag:"🇮🇹",postal:"20121",lat:45.46,lng:9.19,detail:"Milan 20121, Italy"},
-  {city:"Rome",country:"Italy",region:"Europe",flag:"🇮🇹",postal:"00100",lat:41.90,lng:12.49,detail:"Rome 00100, Italy"},
-  {city:"Zurich",country:"Switzerland",region:"Europe",flag:"🇨🇭",postal:"8001",lat:47.38,lng:8.54,detail:"Zurich 8001, Switzerland"},
-  {city:"Geneva",country:"Switzerland",region:"Europe",flag:"🇨🇭",postal:"1201",lat:46.20,lng:6.14,detail:"Geneva 1201, Switzerland"},
-  {city:"Brussels",country:"Belgium",region:"Europe",flag:"🇧🇪",postal:"1000",lat:50.85,lng:4.35,detail:"Brussels 1000, Belgium"},
-  {city:"Vienna",country:"Austria",region:"Europe",flag:"🇦🇹",postal:"1010",lat:48.21,lng:16.37,detail:"Vienna 1010, Austria"},
-  {city:"Warsaw",country:"Poland",region:"Europe",flag:"🇵🇱",postal:"00-001",lat:52.23,lng:21.01,detail:"Warsaw 00-001, Poland"},
-  {city:"Prague",country:"Czech Republic",region:"Europe",flag:"🇨🇿",postal:"110 00",lat:50.08,lng:14.44,detail:"Prague 110 00, Czech Republic"},
-  {city:"Stockholm",country:"Sweden",region:"Europe",flag:"🇸🇪",postal:"111 29",lat:59.33,lng:18.07,detail:"Stockholm 111 29, Sweden"},
-  {city:"Copenhagen",country:"Denmark",region:"Europe",flag:"🇩🇰",postal:"1050",lat:55.68,lng:12.57,detail:"Copenhagen 1050, Denmark"},
-  {city:"Oslo",country:"Norway",region:"Europe",flag:"🇳🇴",postal:"0010",lat:59.91,lng:10.75,detail:"Oslo 0010, Norway"},
-  {city:"Helsinki",country:"Finland",region:"Europe",flag:"🇫🇮",postal:"00100",lat:60.17,lng:24.94,detail:"Helsinki 00100, Finland"},
-  {city:"Lisbon",country:"Portugal",region:"Europe",flag:"🇵🇹",postal:"1100",lat:38.72,lng:-9.14,detail:"Lisbon 1100, Portugal"},
-  {city:"Dublin",country:"Ireland",region:"Europe",flag:"🇮🇪",postal:"D01",lat:53.33,lng:-6.25,detail:"Dublin D01, Ireland"},
-  {city:"Athens",country:"Greece",region:"Europe",flag:"🇬🇷",postal:"10431",lat:37.98,lng:23.73,detail:"Athens 10431, Greece"},
-  {city:"Budapest",country:"Hungary",region:"Europe",flag:"🇭🇺",postal:"1011",lat:47.50,lng:19.04,detail:"Budapest 1011, Hungary"},
-  {city:"Bucharest",country:"Romania",region:"Europe",flag:"🇷🇴",postal:"010011",lat:44.43,lng:26.10,detail:"Bucharest 010011, Romania"},
-  {city:"Tokyo",country:"Japan",region:"Asia Pacific",flag:"🇯🇵",postal:"100-0001",lat:35.68,lng:139.69,detail:"Tokyo 100-0001, Japan"},
-  {city:"Osaka",country:"Japan",region:"Asia Pacific",flag:"🇯🇵",postal:"530-0001",lat:34.69,lng:135.50,detail:"Osaka 530-0001, Japan"},
-  {city:"Nagoya",country:"Japan",region:"Asia Pacific",flag:"🇯🇵",postal:"460-0001",lat:35.18,lng:136.91,detail:"Nagoya 460-0001, Japan"},
-  {city:"Seoul",country:"South Korea",region:"Asia Pacific",flag:"🇰🇷",postal:"04524",lat:37.57,lng:126.98,detail:"Seoul 04524, South Korea"},
-  {city:"Busan",country:"South Korea",region:"Asia Pacific",flag:"🇰🇷",postal:"48941",lat:35.10,lng:129.03,detail:"Busan 48941, South Korea"},
-  {city:"Shanghai",country:"China",region:"Asia Pacific",flag:"🇨🇳",postal:"200001",lat:31.23,lng:121.47,detail:"Shanghai 200001, China"},
-  {city:"Beijing",country:"China",region:"Asia Pacific",flag:"🇨🇳",postal:"100000",lat:39.91,lng:116.39,detail:"Beijing 100000, China"},
-  {city:"Shenzhen",country:"China",region:"Asia Pacific",flag:"🇨🇳",postal:"518000",lat:22.54,lng:114.06,detail:"Shenzhen 518000, China"},
-  {city:"Guangzhou",country:"China",region:"Asia Pacific",flag:"🇨🇳",postal:"510000",lat:23.13,lng:113.26,detail:"Guangzhou 510000, China"},
-  {city:"Chengdu",country:"China",region:"Asia Pacific",flag:"🇨🇳",postal:"610000",lat:30.57,lng:104.07,detail:"Chengdu 610000, China"},
-  {city:"Hong Kong",country:"Hong Kong SAR",region:"Asia Pacific",flag:"🇭🇰",postal:"HK",lat:22.32,lng:114.17,detail:"Hong Kong SAR, China"},
-  {city:"Taipei",country:"Taiwan",region:"Asia Pacific",flag:"🇹🇼",postal:"100",lat:25.05,lng:121.56,detail:"Taipei 100, Taiwan"},
-  {city:"Singapore",country:"Singapore",region:"Asia Pacific",flag:"🇸🇬",postal:"018956",lat:1.35,lng:103.82,detail:"Singapore 018956"},
-  {city:"Kuala Lumpur",country:"Malaysia",region:"Asia Pacific",flag:"🇲🇾",postal:"50000",lat:3.14,lng:101.69,detail:"Kuala Lumpur 50000, Malaysia"},
-  {city:"Jakarta",country:"Indonesia",region:"Asia Pacific",flag:"🇮🇩",postal:"10110",lat:-6.21,lng:106.85,detail:"Jakarta 10110, Indonesia"},
-  {city:"Bangkok",country:"Thailand",region:"Asia Pacific",flag:"🇹🇭",postal:"10200",lat:13.75,lng:100.52,detail:"Bangkok 10200, Thailand"},
-  {city:"Ho Chi Minh City",country:"Vietnam",region:"Asia Pacific",flag:"🇻🇳",postal:"70000",lat:10.82,lng:106.63,detail:"Ho Chi Minh City 70000, Vietnam"},
-  {city:"Hanoi",country:"Vietnam",region:"Asia Pacific",flag:"🇻🇳",postal:"10000",lat:21.03,lng:105.85,detail:"Hanoi 10000, Vietnam"},
-  {city:"Manila",country:"Philippines",region:"Asia Pacific",flag:"🇵🇭",postal:"1000",lat:14.60,lng:120.98,detail:"Manila 1000, Philippines"},
-  {city:"Sydney",country:"Australia",region:"Asia Pacific",flag:"🇦🇺",postal:"NSW 2000",lat:-33.87,lng:151.21,detail:"Sydney NSW 2000, Australia"},
-  {city:"Melbourne",country:"Australia",region:"Asia Pacific",flag:"🇦🇺",postal:"VIC 3000",lat:-37.81,lng:144.96,detail:"Melbourne VIC 3000, Australia"},
-  {city:"Brisbane",country:"Australia",region:"Asia Pacific",flag:"🇦🇺",postal:"QLD 4000",lat:-27.47,lng:153.02,detail:"Brisbane QLD 4000, Australia"},
-  {city:"Perth",country:"Australia",region:"Asia Pacific",flag:"🇦🇺",postal:"WA 6000",lat:-31.95,lng:115.86,detail:"Perth WA 6000, Australia"},
-  {city:"Auckland",country:"New Zealand",region:"Asia Pacific",flag:"🇳🇿",postal:"1010",lat:-36.87,lng:174.77,detail:"Auckland 1010, New Zealand"},
-  {city:"Mumbai",country:"India",region:"South Asia",flag:"🇮🇳",postal:"400001",lat:19.08,lng:72.88,detail:"Mumbai 400001, India"},
-  {city:"Delhi",country:"India",region:"South Asia",flag:"🇮🇳",postal:"110001",lat:28.63,lng:77.22,detail:"Delhi 110001, India"},
-  {city:"Bangalore",country:"India",region:"South Asia",flag:"🇮🇳",postal:"560001",lat:12.97,lng:77.59,detail:"Bangalore 560001, India"},
-  {city:"Chennai",country:"India",region:"South Asia",flag:"🇮🇳",postal:"600001",lat:13.08,lng:80.27,detail:"Chennai 600001, India"},
-  {city:"Hyderabad",country:"India",region:"South Asia",flag:"🇮🇳",postal:"500001",lat:17.38,lng:78.47,detail:"Hyderabad 500001, India"},
-  {city:"Karachi",country:"Pakistan",region:"South Asia",flag:"🇵🇰",postal:"74200",lat:24.86,lng:67.01,detail:"Karachi 74200, Pakistan"},
-  {city:"Colombo",country:"Sri Lanka",region:"South Asia",flag:"🇱🇰",postal:"00100",lat:6.93,lng:79.85,detail:"Colombo 00100, Sri Lanka"},
-  {city:"Dubai",country:"UAE",region:"Middle East",flag:"🇦🇪",postal:"00000",lat:25.20,lng:55.27,detail:"Dubai, United Arab Emirates"},
-  {city:"Abu Dhabi",country:"UAE",region:"Middle East",flag:"🇦🇪",postal:"00000",lat:24.45,lng:54.38,detail:"Abu Dhabi, United Arab Emirates"},
-  {city:"Riyadh",country:"Saudi Arabia",region:"Middle East",flag:"🇸🇦",postal:"11564",lat:24.69,lng:46.72,detail:"Riyadh 11564, Saudi Arabia"},
-  {city:"Jeddah",country:"Saudi Arabia",region:"Middle East",flag:"🇸🇦",postal:"21441",lat:21.49,lng:39.19,detail:"Jeddah 21441, Saudi Arabia"},
-  {city:"Doha",country:"Qatar",region:"Middle East",flag:"🇶🇦",postal:"00000",lat:25.29,lng:51.53,detail:"Doha, Qatar"},
-  {city:"Kuwait City",country:"Kuwait",region:"Middle East",flag:"🇰🇼",postal:"13001",lat:29.37,lng:47.98,detail:"Kuwait City 13001, Kuwait"},
-  {city:"Tel Aviv",country:"Israel",region:"Middle East",flag:"🇮🇱",postal:"61000",lat:32.07,lng:34.79,detail:"Tel Aviv 61000, Israel"},
-  {city:"Istanbul",country:"Turkey",region:"Middle East",flag:"🇹🇷",postal:"34000",lat:41.01,lng:28.95,detail:"Istanbul 34000, Turkey"},
-  {city:"Amman",country:"Jordan",region:"Middle East",flag:"🇯🇴",postal:"11118",lat:31.95,lng:35.93,detail:"Amman 11118, Jordan"},
-  {city:"Cairo",country:"Egypt",region:"Africa",flag:"🇪🇬",postal:"11511",lat:30.04,lng:31.24,detail:"Cairo 11511, Egypt"},
-  {city:"Lagos",country:"Nigeria",region:"Africa",flag:"🇳🇬",postal:"100001",lat:6.45,lng:3.40,detail:"Lagos 100001, Nigeria"},
-  {city:"Nairobi",country:"Kenya",region:"Africa",flag:"🇰🇪",postal:"00100",lat:-1.29,lng:36.82,detail:"Nairobi 00100, Kenya"},
-  {city:"Johannesburg",country:"South Africa",region:"Africa",flag:"🇿🇦",postal:"2001",lat:-26.20,lng:28.04,detail:"Johannesburg 2001, South Africa"},
-  {city:"Cape Town",country:"South Africa",region:"Africa",flag:"🇿🇦",postal:"8001",lat:-33.93,lng:18.42,detail:"Cape Town 8001, South Africa"},
-  {city:"Casablanca",country:"Morocco",region:"Africa",flag:"🇲🇦",postal:"20000",lat:33.59,lng:-7.62,detail:"Casablanca 20000, Morocco"},
-  {city:"Accra",country:"Ghana",region:"Africa",flag:"🇬🇭",postal:"GA",lat:5.56,lng:-0.20,detail:"Accra, Ghana"},
-  {city:"Addis Ababa",country:"Ethiopia",region:"Africa",flag:"🇪🇹",postal:"1000",lat:9.03,lng:38.74,detail:"Addis Ababa 1000, Ethiopia"},
-  {city:"Dar es Salaam",country:"Tanzania",region:"Africa",flag:"🇹🇿",postal:"11101",lat:-6.79,lng:39.21,detail:"Dar es Salaam 11101, Tanzania"},
-  {city:"Sao Paulo",country:"Brazil",region:"Latin America",flag:"🇧🇷",postal:"01310-100",lat:-23.55,lng:-46.63,detail:"Sao Paulo 01310-100, Brazil"},
-  {city:"Rio de Janeiro",country:"Brazil",region:"Latin America",flag:"🇧🇷",postal:"20040-020",lat:-22.91,lng:-43.17,detail:"Rio de Janeiro 20040-020, Brazil"},
-  {city:"Buenos Aires",country:"Argentina",region:"Latin America",flag:"🇦🇷",postal:"C1000",lat:-34.60,lng:-58.38,detail:"Buenos Aires C1000, Argentina"},
-  {city:"Santiago",country:"Chile",region:"Latin America",flag:"🇨🇱",postal:"8320000",lat:-33.45,lng:-70.67,detail:"Santiago 8320000, Chile"},
-  {city:"Lima",country:"Peru",region:"Latin America",flag:"🇵🇪",postal:"15001",lat:-12.05,lng:-77.04,detail:"Lima 15001, Peru"},
-  {city:"Bogota",country:"Colombia",region:"Latin America",flag:"🇨🇴",postal:"110111",lat:4.71,lng:-74.07,detail:"Bogota 110111, Colombia"},
-  {city:"Moscow",country:"Russia",region:"Eastern Europe & CIS",flag:"🇷🇺",postal:"101000",lat:55.75,lng:37.62,detail:"Moscow 101000, Russia"},
-  {city:"St. Petersburg",country:"Russia",region:"Eastern Europe & CIS",flag:"🇷🇺",postal:"190000",lat:59.94,lng:30.32,detail:"St. Petersburg 190000, Russia"},
-  {city:"Kyiv",country:"Ukraine",region:"Eastern Europe & CIS",flag:"🇺🇦",postal:"01001",lat:50.45,lng:30.52,detail:"Kyiv 01001, Ukraine"},
-  {city:"Almaty",country:"Kazakhstan",region:"Eastern Europe & CIS",flag:"🇰🇿",postal:"050000",lat:43.24,lng:76.89,detail:"Almaty 050000, Kazakhstan"},
-];
+const CITIES=[];
+let geoCache={};
+let geoTimers={origin:null,dest:null};
 
 let rzPriority='Balanced';
-let sugTimers={origin:null,dest:null};
-let originCity=null,destCity=null;
 let projection=null;
 
 (function init(){
   const t=new Date();
   const pad=n=>String(n).padStart(2,'0');
   document.getElementById('rz-deadline').min=`${t.getFullYear()}-${pad(t.getMonth()+1)}-${pad(t.getDate())}`;
-  document.addEventListener('click',e=>{
-    if(!e.target.closest('#orig-field'))document.getElementById('sug-origin').style.display='none';
-    if(!e.target.closest('#dest-field'))document.getElementById('sug-dest').style.display='none';
-  });
+
   loadMap();
 })();
 
@@ -406,6 +299,34 @@ function loadMap(){
   const W=960,H=480;
   projection=d3.geoNaturalEarth1().scale(153).translate([W/2,H/2]);
   const path=d3.geoPath().projection(projection);
+  const svg=d3.select('#rz-mapsvg');
+
+  const zoomG=svg.append('g').attr('id','rz-zoom-g');
+  d3.select('#rz-countries').remove();
+  d3.select('#rz-route').remove();
+  zoomG.append('g').attr('id','rz-countries');
+  zoomG.append('g').attr('id','rz-route');
+
+  const zoom=d3.zoom()
+    .scaleExtent([1,12])
+    .on('zoom',function(event){
+      zoomG.attr('transform',event.transform);
+    });
+
+  svg.call(zoom);
+
+  svg.on('dblclick.zoom',null);
+
+  d3.select('#rz-zoom-in').on('click',function(){
+    svg.transition().duration(300).call(zoom.scaleBy,1.6);
+  });
+  d3.select('#rz-zoom-out').on('click',function(){
+    svg.transition().duration(300).call(zoom.scaleBy,0.625);
+  });
+  d3.select('#rz-zoom-reset').on('click',function(){
+    svg.transition().duration(300).call(zoom.transform,d3.zoomIdentity);
+  });
+
   d3.json('https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json').then(world=>{
     const countries=topojson.feature(world,world.objects.countries);
     d3.select('#rz-countries').selectAll('path')
@@ -441,34 +362,64 @@ function updateRoute(){
 
 function rzPrio(el){document.querySelectorAll('.rz-prio').forEach(e=>e.classList.remove('active'));el.classList.add('active');rzPriority=el.dataset.p;}
 
+
+
+
+
 function rzSuggest(field,val){
   const id=field==='origin'?'sug-origin':'sug-dest';
   const box=document.getElementById(id);
-  clearTimeout(sugTimers[field]);
-  if(val.length<2){box.style.display='none';return;}
-  sugTimers[field]=setTimeout(()=>{
-    const q=val.toLowerCase();
-    const matches=CITIES.filter(c=>
-      c.city.toLowerCase().includes(q)||c.country.toLowerCase().includes(q)||
-      c.region.toLowerCase().includes(q)||(c.province&&c.province.toLowerCase().includes(q))||
-      c.postal.toLowerCase().includes(q)
-    ).slice(0,8);
-    if(!matches.length){box.style.display='none';return;}
-    box.innerHTML=matches.map(c=>`<div class="rz-sug-item" onclick="rzPickSug('${field}',${CITIES.indexOf(c)})">
-      <span class="rz-sug-flag">${c.flag}</span>
-      <div><div class="rz-sug-city">${c.city}${c.province?', '+c.province:''}, ${c.country}</div>
-      <div class="rz-sug-detail">${c.postal}</div>
-      <div class="rz-sug-region">${c.region}</div></div>
-    </div>`).join('');
-    box.style.display='block';
-  },160);
+  clearTimeout(geoTimers[field]);
+  if(val.length<3){box.style.display='none';return;}
+  box.innerHTML='<div style="padding:10px 12px;font-size:12px;color:#444;font-family:Rajdhani,sans-serif;letter-spacing:1px">Searching...</div>';
+  box.style.display='block';
+  geoTimers[field]=setTimeout(async()=>{
+    const cacheKey=val.toLowerCase();
+    if(geoCache[cacheKey]){renderSuggestions(field,geoCache[cacheKey],box);return;}
+    try{
+      const res=await fetch('https://nominatim.openstreetmap.org/search?q='+encodeURIComponent(val)+'&format=json&limit=8&addressdetails=1',{
+        headers:{'Accept-Language':'en','User-Agent':'RazerATLAS/1.0'}
+      });
+      const data=await res.json();
+      geoCache[cacheKey]=data;
+      renderSuggestions(field,data,box);
+    }catch(e){
+      box.innerHTML='<div style="padding:10px 12px;font-size:12px;color:#ff5555">Search unavailable. Type address manually.</div>';
+    }
+  },400);
 }
 
-function rzPickSug(field,idx){
-  const c=CITIES[idx];
-  document.getElementById(field==='origin'?'rz-origin':'rz-dest').value=c.detail;
+function renderSuggestions(field,data,box){
+  if(!data.length){box.style.display='none';return;}
+  const items=data.map(function(r){
+    const name=r.display_name||'';
+    const short=name.split(',').slice(0,3).join(',');
+    const country=(r.address&&r.address.country)||'';
+    const postal=(r.address&&r.address.postcode)||'';
+    const flag=getCountryFlag((r.address&&r.address.country_code)||'');
+    const lat=r.lat;
+    const lng=r.lon;
+    const div=document.createElement('div');
+    div.className='rz-sug-item';
+    div.innerHTML='<span class="rz-sug-flag">'+flag+'</span><div><div class="rz-sug-city">'+short+'</div><div class="rz-sug-detail">'+(postal?postal+' &middot; ':'')+country+'</div></div>';
+    div.onclick=function(){rzPickSug(field,name,lat,lng);};
+    return div;
+  });
+  box.innerHTML='';
+  items.forEach(function(el){box.appendChild(el);});
+  box.style.display='block';
+}
+function getCountryFlag(code){
+  if(!code)return'🌍';
+  const offset=127397;
+  return code.toUpperCase().split('').map(c=>String.fromCodePoint(c.charCodeAt(0)+offset)).join('');
+}
+
+function rzPickSug(field,fullName,lat,lng){
+  document.getElementById(field==='origin'?'rz-origin':'rz-dest').value=fullName;
   document.getElementById(field==='origin'?'sug-origin':'sug-dest').style.display='none';
-  if(field==='origin')originCity=c; else destCity=c;
+  const cityObj={city:fullName.split(',')[0],lat:parseFloat(lat),lng:parseFloat(lng),detail:fullName};
+  if(field==='origin')originCity=cityObj; else destCity=cityObj;
   updateRoute();
 }
 
