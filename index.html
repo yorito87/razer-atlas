@@ -144,11 +144,11 @@ body{font-family:'Barlow',sans-serif;background:#050505;min-height:100vh;display
         <div class="rz-grid">
           <div class="rz-field full" id="orig-field">
             <div class="rz-lbl">Origin address</div>
-            <input class="rz-inp" id="rz-origin" type="text" placeholder="e.g. Vancouver BC, Tokyo Japan, SW1A 1AA London..." autocomplete="off">
+            <input class="rz-inp" id="rz-origin" type="text" placeholder="Type any city worldwide..." autocomplete="off" oninput="rzSuggest('origin',this.value)">
           </div>
           <div class="rz-field full" id="dest-field">
             <div class="rz-lbl">Destination address</div>
-            <input class="rz-inp" id="rz-dest" type="text" placeholder="e.g. Singapore 018956, Dubai UAE, 10001 New York..." autocomplete="off">
+            <input class="rz-inp" id="rz-dest" type="text" placeholder="Type any city worldwide..." autocomplete="off" oninput="rzSuggest('dest',this.value)">
           </div>
         </div>
       </div>
@@ -431,11 +431,11 @@ const CITIES=[
   {city:"Almaty",country:"Kazakhstan",flag:"🇰🇿",lat:43.24,lng:76.89},
   {city:"Tashkent",country:"Uzbekistan",flag:"🇺🇿",lat:41.30,lng:69.24},
 ];
-let geoTimers={origin:null,dest:null};
-
 let rzPriority='Balanced';
 let projection=null;
 let mapZoom=null;
+let originCity=null,destCity=null;
+let geoTimers={origin:null,dest:null};
 
 (function init(){
   const t=new Date();
