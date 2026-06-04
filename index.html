@@ -689,7 +689,7 @@ Return: {"routes":[{"carrier":"string","mode":"string","service_code":"string","
 One recommended:true. feasible:false if misses deadline. ETA as "Jun 22, 2026".`;
 
   try{
-    const res=await fetch('/.netlify/functions/proxy',{
+    const res=await fetch('/api/proxy',{
       method:'POST',
       headers:{'Content-Type':'application/json'},
       body:JSON.stringify({model:'claude-haiku-4-5-20251001',max_tokens:1200,messages:[{role:'user',content:prompt}]})
