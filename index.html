@@ -128,8 +128,6 @@ body{font-family:'Barlow',sans-serif;background:#050505;min-height:100vh;display
         <div style="position:relative">
           <svg id="rz-mapsvg" viewBox="0 0 960 480" preserveAspectRatio="xMidYMid meet" style="cursor:grab">
             <rect width="960" height="480" fill="#0a0f0a"/>
-            <g id="rz-countries"></g>
-            <g id="rz-route"></g>
           </svg>
           <div style="position:absolute;bottom:8px;right:8px;display:flex;flex-direction:column;gap:3px">
             <button id="rz-zoom-in" style="width:24px;height:24px;background:#111;border:1px solid #2a2a2a;border-radius:3px;color:#44ff44;font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;line-height:1;padding:0">+</button>
@@ -302,10 +300,6 @@ function loadMap(){
   const path=d3.geoPath().projection(projection);
   const svg=d3.select('#rz-mapsvg');
 
-  // Clear existing inline groups from HTML
-  svg.select('#rz-countries').remove();
-  svg.select('#rz-route').remove();
-
   // Add arrowhead marker to SVG defs once
   svg.append('defs').html('<marker id="rzarrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#44ff44"/></marker>');
 
@@ -370,7 +364,18 @@ function updateRoute(){
     .attr('stroke-width','1.5')
     .attr('fill','none')
     .attr('stroke-dasharray','5,3')
-    .attr('marker-end','url(#rzarrow)')
+    .attr('opacity','0.9');
+
+  // Draw arrowhead manually at destination point
+  const angle=Math.atan2(y2-my,x2-mx);
+  const alen=10;
+  const a1x=x2-alen*Math.cos(angle-0.4);
+  const a1y=y2-alen*Math.sin(angle-0.4);
+  const a2x=x2-alen*Math.cos(angle+0.4);
+  const a2y=y2-alen*Math.sin(angle+0.4);
+  routeLayer.append('polygon')
+    .attr('points',x2+','+y2+' '+a1x+','+a1y+' '+a2x+','+a2y)
+    .attr('fill','#44ff44')
     .attr('opacity','0.9');
 
   routeLayer.append('circle').attr('cx',x1).attr('cy',y1).attr('r',5).attr('fill','#44ff44');
