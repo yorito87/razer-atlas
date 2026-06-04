@@ -9,16 +9,16 @@
 @import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Barlow:wght@300;400;500&display=swap');
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:'Barlow',sans-serif;background:#050505;min-height:100vh;display:flex;align-items:flex-start;justify-content:center;padding:24px 16px}
-.page-wrap{width:100%;max-width:680px}
-.rz-wrap{background:#0a0a0a;border-radius:12px;overflow:visible;border:1px solid #1e1e1e}
-.rz-topbar{background:#0d0d0d;border-bottom:1px solid #1e1e1e;padding:14px 22px;display:flex;align-items:center;gap:14px;border-radius:12px 12px 0 0}
+.page-wrap{width:100%;max-width:700px}
+.rz-wrap{background:#0a0a0a;border-radius:12px;border:1px solid #1e1e1e}
+.rz-topbar{background:#0d0d0d;border-bottom:1px solid #1e1e1e;padding:13px 20px;display:flex;align-items:center;gap:14px;border-radius:12px 12px 0 0}
 .rz-vdiv{width:1px;height:22px;background:#2a2a2a}
 .rz-wordmark{font-family:'Rajdhani',sans-serif;font-weight:700;font-size:18px;color:#fff;letter-spacing:3px;text-transform:uppercase;line-height:1}
 .rz-subtitle{font-size:10px;color:#44ff44;letter-spacing:2.5px;font-family:'Rajdhani',sans-serif;font-weight:500;text-transform:uppercase}
-.rz-body{padding:20px 22px}
+.rz-body{padding:18px 20px}
 .rz-slabel{font-size:10px;letter-spacing:2px;color:#44ff44;font-family:'Rajdhani',sans-serif;font-weight:600;text-transform:uppercase;margin-bottom:10px;display:flex;align-items:center;gap:6px}
 .rz-slabel::before{content:'';display:inline-block;width:2px;height:11px;background:#44ff44;border-radius:1px}
-.rz-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px}
+.rz-grid{display:grid;grid-template-columns:1fr 1fr;gap:11px;margin-bottom:14px}
 .rz-field{display:flex;flex-direction:column;gap:5px;position:relative}
 .rz-field.full{grid-column:1/-1}
 .rz-lbl{font-size:10px;letter-spacing:1.5px;color:#555;font-family:'Rajdhani',sans-serif;font-weight:600;text-transform:uppercase}
@@ -26,87 +26,86 @@ body{font-family:'Barlow',sans-serif;background:#050505;min-height:100vh;display
 .rz-inp:focus,.rz-sel:focus{border-color:#44ff44;box-shadow:0 0 0 2px rgba(68,255,68,0.07)}
 .rz-inp::placeholder{color:#333}
 .rz-sel option,.rz-sel optgroup{background:#111;color:#ddd}
-.rz-autosug{position:absolute;top:100%;left:0;right:0;background:#161616;border:1px solid #2a2a2a;border-top:none;border-radius:0 0 6px 6px;z-index:200;max-height:220px;overflow-y:auto;box-shadow:0 8px 24px rgba(0,0,0,0.7)}
-.rz-sug-item{padding:9px 12px;font-size:12px;color:#aaa;cursor:pointer;border-bottom:1px solid #1a1a1a;line-height:1.4;display:flex;align-items:center;gap:8px}
+.rz-autosug{position:absolute;top:100%;left:0;right:0;background:#161616;border:1px solid #2a2a2a;border-top:none;border-radius:0 0 6px 6px;z-index:9999;max-height:220px;overflow-y:auto;box-shadow:0 8px 24px rgba(0,0,0,0.8)}
+.rz-sug-item{padding:9px 12px;font-size:12px;color:#aaa;cursor:pointer;border-bottom:1px solid #1a1a1a;display:flex;align-items:center;gap:8px}
 .rz-sug-item:last-child{border-bottom:none}
 .rz-sug-item:hover{background:#1e1e1e;color:#fff}
 .rz-sug-flag{font-size:16px;flex-shrink:0}
 .rz-sug-city{font-weight:500;color:#ddd;font-size:12px}
 .rz-sug-detail{font-size:11px;color:#444;margin-top:1px}
-.rz-sug-region{font-size:10px;color:#2a6e2a;font-family:'Rajdhani',sans-serif;letter-spacing:1px;text-transform:uppercase;margin-top:1px}
 .rz-wpill{display:inline-flex;align-items:center;gap:5px;margin-top:5px;background:rgba(68,255,68,0.07);border:1px solid rgba(68,255,68,0.2);border-radius:3px;padding:3px 9px;font-size:11px;color:#44ff44;font-family:'Rajdhani',sans-serif;letter-spacing:1px}
 .rz-sel-wrap{position:relative}
 .rz-sel-wrap::after{content:'';position:absolute;right:11px;top:50%;transform:translateY(-50%);width:0;height:0;border-left:4px solid transparent;border-right:4px solid transparent;border-top:5px solid #444;pointer-events:none}
 .rz-cal-wrap{position:relative}
 .rz-cal-inp::-webkit-calendar-picker-indicator{opacity:0;position:absolute;right:0;top:0;width:100%;height:100%;cursor:pointer}
 .rz-cal-icon{position:absolute;right:10px;top:50%;transform:translateY(-50%);color:#444;font-size:16px;pointer-events:none}
-.rz-prio-row{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:18px}
-.rz-prio{background:#111;border:1px solid #1e1e1e;border-radius:4px;padding:11px 8px;display:flex;flex-direction:column;align-items:center;gap:4px;cursor:pointer;transition:all .15s;color:#555;font-size:11px;font-family:'Rajdhani',sans-serif;font-weight:600;letter-spacing:1px;text-transform:uppercase}
-.rz-prio i{font-size:20px}
+.rz-prio-row{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:16px}
+.rz-prio{background:#111;border:1px solid #1e1e1e;border-radius:4px;padding:10px 8px;display:flex;flex-direction:column;align-items:center;gap:4px;cursor:pointer;transition:all .15s;color:#555;font-size:11px;font-family:'Rajdhani',sans-serif;font-weight:600;letter-spacing:1px;text-transform:uppercase}
+.rz-prio i{font-size:18px}
 .rz-prio:hover{border-color:#2e2e2e;color:#999}
 .rz-prio.active{border-color:#44ff44;color:#44ff44;background:rgba(68,255,68,0.05)}
-.rz-btn{width:100%;height:46px;background:#44ff44;color:#000;border:none;border-radius:4px;font-family:'Rajdhani',sans-serif;font-weight:700;font-size:14px;letter-spacing:3px;text-transform:uppercase;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;transition:opacity .15s}
+.rz-btn{width:100%;height:44px;background:#44ff44;color:#000;border:none;border-radius:4px;font-family:'Rajdhani',sans-serif;font-weight:700;font-size:14px;letter-spacing:3px;text-transform:uppercase;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;transition:opacity .15s}
 .rz-btn:hover{opacity:.88}
-.rz-loader{display:none;padding:28px 0;text-align:center}
+.rz-loader{display:none;padding:24px 0;text-align:center}
 .rz-loader.on{display:block}
-.rz-bar-track{height:2px;background:#1a1a1a;border-radius:1px;overflow:hidden;margin-bottom:14px}
+.rz-bar-track{height:2px;background:#1a1a1a;border-radius:1px;overflow:hidden;margin-bottom:12px}
 .rz-bar-fill{height:100%;width:0%;background:#44ff44;animation:rzbar 2.4s ease forwards}
 @keyframes rzbar{0%{width:0}65%{width:80%}100%{width:100%}}
 .rz-ltxt{font-size:11px;color:#44ff44;font-family:'Rajdhani',sans-serif;letter-spacing:2px}
 .rz-results{display:none}
 .rz-results.on{display:block;margin-top:4px}
-.rz-sep{border:none;border-top:1px solid #1a1a1a;margin:18px 0}
+.rz-sep{border:none;border-top:1px solid #1a1a1a;margin:16px 0}
 .rz-route-list{display:grid;gap:10px}
-.rz-card{background:#0f0f0f;border:1px solid #1e1e1e;border-radius:6px;padding:16px}
+.rz-card{background:#0f0f0f;border:1px solid #1e1e1e;border-radius:6px;padding:15px}
 .rz-card.rec{border-color:#44ff44}
 .rz-rec-pill{display:inline-block;background:#44ff44;color:#000;font-size:9px;font-weight:700;letter-spacing:2px;font-family:'Rajdhani',sans-serif;padding:2px 10px;border-radius:2px;margin-bottom:10px;text-transform:uppercase}
 .rz-card-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
 .rz-mode-row{display:flex;align-items:center;gap:10px}
-.rz-mode-dot{width:36px;height:36px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:17px}
+.rz-mode-dot{width:34px;height:34px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:16px}
 .d-air{background:rgba(68,255,68,0.1);color:#44ff44}
 .d-sea{background:rgba(68,180,255,0.1);color:#44b4ff}
 .d-land{background:rgba(255,200,68,0.1);color:#ffc844}
 .d-multi{background:rgba(200,68,255,0.1);color:#c844ff}
-.rz-carrier-badge{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-family:'Rajdhani',sans-serif;letter-spacing:1px;padding:2px 8px;border-radius:3px;margin-top:3px}
+.rz-carrier-badge{display:inline-flex;align-items:center;font-size:11px;font-family:'Rajdhani',sans-serif;letter-spacing:1px;padding:2px 8px;border-radius:3px;margin-top:3px}
 .badge-fedex{background:rgba(71,35,119,0.3);color:#9b70e0;border:1px solid rgba(71,35,119,0.5)}
 .badge-ups{background:rgba(90,60,20,0.3);color:#d4a030;border:1px solid rgba(90,60,20,0.5)}
 .badge-dhl{background:rgba(200,30,20,0.3);color:#ff6060;border:1px solid rgba(200,30,20,0.5)}
 .rz-mname{font-family:'Rajdhani',sans-serif;font-weight:600;font-size:15px;color:#e0e0e0;letter-spacing:1px}
-.rz-cost-val{font-family:'Rajdhani',sans-serif;font-size:22px;font-weight:700;color:#fff}
+.rz-cost-val{font-family:'Rajdhani',sans-serif;font-size:20px;font-weight:700;color:#fff}
 .rz-cost-lbl{font-size:10px;color:#444;letter-spacing:1px;text-align:right}
 .rz-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:7px}
-.rz-stat{background:#0a0a0a;border:1px solid #1a1a1a;border-radius:4px;padding:8px 10px}
+.rz-stat{background:#0a0a0a;border:1px solid #1a1a1a;border-radius:4px;padding:7px 9px}
 .rz-stat-lbl{font-size:10px;color:#444;letter-spacing:1px;font-family:'Rajdhani',sans-serif;text-transform:uppercase;margin-bottom:3px}
 .rz-stat-val{font-size:13px;color:#bbb;font-weight:500}
-.rz-bars{margin-top:12px;padding-top:12px;border-top:1px solid #1a1a1a}
-.rz-brow{display:flex;align-items:center;gap:8px;margin-bottom:6px}
-.rz-blbl{font-size:10px;color:#444;width:70px;flex-shrink:0;font-family:'Rajdhani',sans-serif;letter-spacing:1px;text-transform:uppercase}
+.rz-bars{margin-top:11px;padding-top:11px;border-top:1px solid #1a1a1a}
+.rz-brow{display:flex;align-items:center;gap:8px;margin-bottom:5px}
+.rz-blbl{font-size:10px;color:#444;width:68px;flex-shrink:0;font-family:'Rajdhani',sans-serif;letter-spacing:1px;text-transform:uppercase}
 .rz-btrack{flex:1;height:3px;background:#1a1a1a;border-radius:2px;overflow:hidden}
 .rz-bfill{height:100%;border-radius:2px;background:#44ff44}
-.rz-bnum{font-size:11px;color:#444;width:26px;text-align:right;font-family:'Rajdhani',sans-serif}
+.rz-bnum{font-size:11px;color:#444;width:24px;text-align:right;font-family:'Rajdhani',sans-serif}
 .rz-note{margin-top:10px;padding-top:10px;border-top:1px solid #1a1a1a;font-size:12px;color:#555;line-height:1.5}
-.rz-reasoning{background:#0d0d0d;border:1px solid #1a1a1a;border-left:2px solid #44ff44;border-radius:0 4px 4px 0;padding:14px 16px;margin-top:14px}
+.rz-reasoning{background:#0d0d0d;border:1px solid #1a1a1a;border-left:2px solid #44ff44;border-radius:0 4px 4px 0;padding:13px 15px;margin-top:13px}
 .rz-r-lbl{font-size:10px;color:#44ff44;letter-spacing:2px;font-family:'Rajdhani',sans-serif;font-weight:700;text-transform:uppercase;margin-bottom:6px}
 .rz-r-txt{font-size:12px;color:#555;line-height:1.7}
-.rz-disclaimer{margin-top:10px;padding:9px 12px;background:rgba(68,255,68,0.02);border:1px solid #1a1a1a;border-radius:4px;font-size:11px;color:#333;line-height:1.6;font-family:'Rajdhani',sans-serif;letter-spacing:0.5px}
-.rz-reset{width:100%;margin-top:14px;padding:10px;background:transparent;border:1px solid #1e1e1e;border-radius:4px;color:#444;font-family:'Rajdhani',sans-serif;font-size:11px;letter-spacing:2px;text-transform:uppercase;cursor:pointer;transition:all .15s}
+.rz-disclaimer{margin-top:10px;padding:8px 12px;background:rgba(68,255,68,0.02);border:1px solid #1a1a1a;border-radius:4px;font-size:11px;color:#333;line-height:1.6;font-family:'Rajdhani',sans-serif}
+.rz-reset{width:100%;margin-top:13px;padding:9px;background:transparent;border:1px solid #1e1e1e;border-radius:4px;color:#444;font-family:'Rajdhani',sans-serif;font-size:11px;letter-spacing:2px;text-transform:uppercase;cursor:pointer;transition:all .15s}
 .rz-reset:hover{border-color:#2e2e2e;color:#777}
-.rz-err{display:none;margin-top:10px;padding:10px 14px;background:rgba(255,60,60,0.07);border:1px solid rgba(255,60,60,0.18);border-radius:4px;font-size:12px;color:#ff5555}
+.rz-err{display:none;margin-top:10px;padding:9px 13px;background:rgba(255,60,60,0.07);border:1px solid rgba(255,60,60,0.18);border-radius:4px;font-size:12px;color:#ff5555}
 .rz-err.on{display:block}
-.rz-minimap{background:#0a0f0a;border:1px solid #1e1e1e;border-radius:6px;margin-bottom:18px;overflow:hidden}
-.rz-minimap-header{padding:9px 14px 4px;display:flex;align-items:center;justify-content:space-between}
+.rz-minimap{background:#0a0f0a;border:1px solid #1e1e1e;border-radius:6px;margin-bottom:16px;overflow:hidden}
+.rz-minimap-header{padding:8px 12px 4px;display:flex;align-items:center;justify-content:space-between}
 .rz-minimap-lbl{font-size:10px;color:#44ff44;font-family:'Rajdhani',sans-serif;letter-spacing:2px;text-transform:uppercase;font-weight:600}
 .rz-minimap-hint{font-size:10px;color:#333;font-family:'Rajdhani',sans-serif;letter-spacing:1px}
-#rz-mapsvg{width:100%;display:block;height:190px}
-.rz-key-notice{margin-bottom:16px;padding:12px 14px;background:rgba(255,180,0,0.05);border:1px solid rgba(255,180,0,0.2);border-radius:4px;font-size:12px;color:#aa8800;line-height:1.6}
-.rz-key-notice strong{color:#ffcc00}
+#rz-mapsvg{width:100%;display:block;height:180px;cursor:grab}
+.rz-zoom-btns{position:absolute;bottom:8px;right:8px;display:flex;flex-direction:column;gap:3px}
+.rz-zoom-btn{width:24px;height:24px;background:#111;border:1px solid #2a2a2a;border-radius:3px;color:#44ff44;font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0;font-family:'Rajdhani',sans-serif}
 </style>
 </head>
 <body>
 <div class="page-wrap">
 <div class="rz-wrap">
   <div class="rz-topbar">
-    <img src="https://cdn.freebiesupply.com/logos/large/2x/razer-logo-png-transparent.png" alt="Razer Logo" style="width:36px;height:36px;object-fit:contain;flex-shrink:0">
+    <img src="https://cdn.freebiesupply.com/logos/large/2x/razer-logo-png-transparent.png" alt="Razer" style="width:36px;height:36px;object-fit:contain;flex-shrink:0">
     <div class="rz-vdiv"></div>
     <div>
       <div class="rz-wordmark">Razer</div>
@@ -115,47 +114,54 @@ body{font-family:'Barlow',sans-serif;background:#050505;min-height:100vh;display
   </div>
 
   <div class="rz-body">
-
-    <!-- API KEY NOTICE -->
-
     <div id="rz-form">
+
       <!-- MINIMAP -->
       <div class="rz-minimap">
         <div class="rz-minimap-header">
           <div class="rz-minimap-lbl">Route minimap</div>
-          <div class="rz-minimap-hint" id="rz-map-hint">Select origin & destination to preview route</div>
+          <div class="rz-minimap-hint" id="rz-map-hint">Select origin &amp; destination to preview route</div>
         </div>
         <div style="position:relative">
-          <svg id="rz-mapsvg" viewBox="0 0 960 480" preserveAspectRatio="xMidYMid meet" style="cursor:grab">
+          <svg id="rz-mapsvg" viewBox="0 0 960 480" preserveAspectRatio="xMidYMid meet">
+            <defs>
+              <marker id="rzarrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+                <polygon points="0 0, 8 3, 0 6" fill="#44ff44"/>
+              </marker>
+            </defs>
             <rect width="960" height="480" fill="#0a0f0a"/>
+            <g id="rz-countries"></g>
+            <g id="rz-route"></g>
           </svg>
-          <div style="position:absolute;bottom:8px;right:8px;display:flex;flex-direction:column;gap:3px">
-            <button id="rz-zoom-in" style="width:24px;height:24px;background:#111;border:1px solid #2a2a2a;border-radius:3px;color:#44ff44;font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;line-height:1;padding:0">+</button>
-            <button id="rz-zoom-out" style="width:24px;height:24px;background:#111;border:1px solid #2a2a2a;border-radius:3px;color:#44ff44;font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;line-height:1;padding:0">−</button>
-            <button id="rz-zoom-reset" style="width:24px;height:24px;background:#111;border:1px solid #2a2a2a;border-radius:3px;color:#555;font-size:9px;cursor:pointer;display:flex;align-items:center;justify-content:center;line-height:1;padding:0;font-family:Rajdhani,sans-serif;letter-spacing:0.5px">FIT</button>
+          <div class="rz-zoom-btns">
+            <button class="rz-zoom-btn" id="rz-zoom-in">+</button>
+            <button class="rz-zoom-btn" id="rz-zoom-out">−</button>
+            <button class="rz-zoom-btn" id="rz-zoom-reset" style="font-size:9px;color:#555">FIT</button>
           </div>
-          <div style="position:absolute;bottom:8px;left:8px;font-size:9px;color:#2a2a2a;font-family:Rajdhani,sans-serif;letter-spacing:1px">SCROLL TO ZOOM · DRAG TO PAN</div>
+          <div style="position:absolute;bottom:8px;left:8px;font-size:9px;color:#2a2a2a;font-family:'Rajdhani',sans-serif;letter-spacing:1px">SCROLL TO ZOOM · DRAG TO PAN</div>
         </div>
       </div>
 
       <!-- ADDRESSES -->
       <div style="margin-bottom:16px">
-        <div class="rz-slabel">Origin & destination</div>
+        <div class="rz-slabel">Origin &amp; destination</div>
         <div class="rz-grid">
           <div class="rz-field full" id="orig-field">
             <div class="rz-lbl">Origin address</div>
-            <input class="rz-inp" id="rz-origin" type="text" placeholder="Type any city worldwide..." autocomplete="off" oninput="rzSuggest('origin',this.value)">
+            <input class="rz-inp" id="rz-origin" type="text" placeholder="Type any city worldwide..." autocomplete="off">
+            <div class="rz-autosug" id="sug-origin" style="display:none"></div>
           </div>
           <div class="rz-field full" id="dest-field">
             <div class="rz-lbl">Destination address</div>
-            <input class="rz-inp" id="rz-dest" type="text" placeholder="Type any city worldwide..." autocomplete="off" oninput="rzSuggest('dest',this.value)">
+            <input class="rz-inp" id="rz-dest" type="text" placeholder="Type any city worldwide..." autocomplete="off">
+            <div class="rz-autosug" id="sug-dest" style="display:none"></div>
           </div>
         </div>
       </div>
 
-      <!-- PRODUCT & DETAILS -->
+      <!-- PRODUCT -->
       <div style="margin-bottom:16px">
-        <div class="rz-slabel">Product & shipment details</div>
+        <div class="rz-slabel">Product &amp; shipment details</div>
         <div class="rz-grid">
           <div class="rz-field full">
             <div class="rz-lbl">Product line</div>
@@ -210,7 +216,7 @@ body{font-family:'Barlow',sans-serif;background:#050505;min-height:100vh;display
               </select>
             </div>
             <div id="rz-wpill" style="display:none" class="rz-wpill">
-              <i class="ti ti-weight" aria-hidden="true" style="font-size:12px"></i>
+              <i class="ti ti-weight" style="font-size:12px"></i>
               <span id="rz-wtxt">Unit weight: —</span>
             </div>
           </div>
@@ -226,7 +232,7 @@ body{font-family:'Barlow',sans-serif;background:#050505;min-height:100vh;display
             <div class="rz-lbl">Required delivery date</div>
             <div class="rz-cal-wrap">
               <input class="rz-inp rz-cal-inp" id="rz-deadline" type="date">
-              <i class="ti ti-calendar rz-cal-icon" aria-hidden="true"></i>
+              <i class="ti ti-calendar rz-cal-icon"></i>
             </div>
           </div>
         </div>
@@ -236,14 +242,14 @@ body{font-family:'Barlow',sans-serif;background:#050505;min-height:100vh;display
       <div style="margin-bottom:16px">
         <div class="rz-slabel">Optimization priority</div>
         <div class="rz-prio-row">
-          <div class="rz-prio active" data-p="Balanced" onclick="rzPrio(this)"><i class="ti ti-scale" aria-hidden="true"></i>Balanced</div>
-          <div class="rz-prio" data-p="Speed" onclick="rzPrio(this)"><i class="ti ti-bolt" aria-hidden="true"></i>Fastest</div>
-          <div class="rz-prio" data-p="Cost" onclick="rzPrio(this)"><i class="ti ti-coin" aria-hidden="true"></i>Cheapest</div>
+          <div class="rz-prio active" data-p="Balanced" onclick="rzPrio(this)"><i class="ti ti-scale"></i>Balanced</div>
+          <div class="rz-prio" data-p="Speed" onclick="rzPrio(this)"><i class="ti ti-bolt"></i>Fastest</div>
+          <div class="rz-prio" data-p="Cost" onclick="rzPrio(this)"><i class="ti ti-coin"></i>Cheapest</div>
         </div>
       </div>
 
       <button class="rz-btn" onclick="rzRun()">
-        <i class="ti ti-cpu" aria-hidden="true"></i>Analyze carrier rates
+        <i class="ti ti-cpu"></i>Analyze carrier rates
       </button>
       <div class="rz-err" id="rz-err"></div>
     </div>
@@ -251,7 +257,7 @@ body{font-family:'Barlow',sans-serif;background:#050505;min-height:100vh;display
     <!-- LOADER -->
     <div class="rz-loader" id="rz-loader">
       <div class="rz-bar-track"><div class="rz-bar-fill"></div></div>
-      <div class="rz-ltxt" id="rz-ltxt">Querying FedEx, UPS & DHL rates...</div>
+      <div class="rz-ltxt" id="rz-ltxt">Querying FedEx, UPS &amp; DHL rates...</div>
     </div>
 
     <!-- RESULTS -->
@@ -260,12 +266,11 @@ body{font-family:'Barlow',sans-serif;background:#050505;min-height:100vh;display
       <div class="rz-slabel" style="margin-bottom:12px">Carrier rate comparison</div>
       <div class="rz-route-list" id="rz-cards"></div>
       <div class="rz-reasoning" id="rz-reasoning"></div>
-      <div class="rz-disclaimer">Rates are AI-estimated benchmarks based on published FedEx, UPS and DHL tariff structures for electronics shipments. Contact carriers directly for binding quotes. Fuel surcharges, remote area fees and customs duties are not included.</div>
+      <div class="rz-disclaimer">Rates are AI-estimated benchmarks based on published FedEx, UPS and DHL tariff structures. Contact carriers directly for binding quotes.</div>
       <button class="rz-reset" onclick="rzReset()">
-        <i class="ti ti-refresh" aria-hidden="true" style="font-size:13px;vertical-align:-1px;margin-right:5px"></i>New analysis
+        <i class="ti ti-refresh" style="font-size:13px;vertical-align:-1px;margin-right:5px"></i>New analysis
       </button>
     </div>
-
   </div>
 </div>
 </div>
@@ -273,482 +278,336 @@ body{font-family:'Barlow',sans-serif;background:#050505;min-height:100vh;display
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/topojson/3.0.2/topojson.min.js"></script>
 <script>
-// ─────────────────────────────────────────────
-// 🔑 PASTE YOUR ANTHROPIC API KEY BELOW
-// API key handled server-side by Netlify function
-// ─────────────────────────────────────────────
+// ── CONFIG ──────────────────────────────────────────
+const LOCATIONIQ_KEY = 'pk.9c12c6c14e47d57b7c8506514a12b36a';
+// ────────────────────────────────────────────────────
 
-const CITIES=[
-  {city:"Tokyo",country:"Japan",flag:"🇯🇵",lat:35.68,lng:139.69},
-  {city:"Osaka",country:"Japan",flag:"🇯🇵",lat:34.69,lng:135.50},
-  {city:"Nagoya",country:"Japan",flag:"🇯🇵",lat:35.18,lng:136.91},
-  {city:"Seoul",country:"South Korea",flag:"🇰🇷",lat:37.57,lng:126.98},
-  {city:"Busan",country:"South Korea",flag:"🇰🇷",lat:35.10,lng:129.03},
-  {city:"Shanghai",country:"China",flag:"🇨🇳",lat:31.23,lng:121.47},
-  {city:"Beijing",country:"China",flag:"🇨🇳",lat:39.91,lng:116.39},
-  {city:"Shenzhen",country:"China",flag:"🇨🇳",lat:22.54,lng:114.06},
-  {city:"Guangzhou",country:"China",flag:"🇨🇳",lat:23.13,lng:113.26},
-  {city:"Chengdu",country:"China",flag:"🇨🇳",lat:30.57,lng:104.07},
-  {city:"Chongqing",country:"China",flag:"🇨🇳",lat:29.56,lng:106.55},
-  {city:"Wuhan",country:"China",flag:"🇨🇳",lat:30.59,lng:114.31},
-  {city:"Hong Kong",country:"Hong Kong SAR",flag:"🇭🇰",lat:22.32,lng:114.17},
-  {city:"Taipei",country:"Taiwan",flag:"🇹🇼",lat:25.05,lng:121.56},
-  {city:"Singapore",country:"Singapore",flag:"🇸🇬",lat:1.35,lng:103.82},
-  {city:"Kuala Lumpur",country:"Malaysia",flag:"🇲🇾",lat:3.14,lng:101.69},
-  {city:"Jakarta",country:"Indonesia",flag:"🇮🇩",lat:-6.21,lng:106.85},
-  {city:"Bangkok",country:"Thailand",flag:"🇹🇭",lat:13.75,lng:100.52},
-  {city:"Ho Chi Minh City",country:"Vietnam",flag:"🇻🇳",lat:10.82,lng:106.63},
-  {city:"Hanoi",country:"Vietnam",flag:"🇻🇳",lat:21.03,lng:105.85},
-  {city:"Manila",country:"Philippines",flag:"🇵🇭",lat:14.60,lng:120.98},
-  {city:"Cebu",country:"Philippines",flag:"🇵🇭",lat:10.32,lng:123.90},
-  {city:"Yangon",country:"Myanmar",flag:"🇲🇲",lat:16.87,lng:96.19},
-  {city:"Phnom Penh",country:"Cambodia",flag:"🇰🇭",lat:11.56,lng:104.92},
-  {city:"Colombo",country:"Sri Lanka",flag:"🇱🇰",lat:6.93,lng:79.85},
-  {city:"Dhaka",country:"Bangladesh",flag:"🇧🇩",lat:23.72,lng:90.41},
-  {city:"Karachi",country:"Pakistan",flag:"🇵🇰",lat:24.86,lng:67.01},
-  {city:"Lahore",country:"Pakistan",flag:"🇵🇰",lat:31.55,lng:74.34},
-  {city:"Mumbai",country:"India",flag:"🇮🇳",lat:19.08,lng:72.88},
-  {city:"Delhi",country:"India",flag:"🇮🇳",lat:28.63,lng:77.22},
-  {city:"Bangalore",country:"India",flag:"🇮🇳",lat:12.97,lng:77.59},
-  {city:"Chennai",country:"India",flag:"🇮🇳",lat:13.08,lng:80.27},
-  {city:"Hyderabad",country:"India",flag:"🇮🇳",lat:17.38,lng:78.47},
-  {city:"Kolkata",country:"India",flag:"🇮🇳",lat:22.57,lng:88.36},
-  {city:"Pune",country:"India",flag:"🇮🇳",lat:18.52,lng:73.86},
-  {city:"Ahmedabad",country:"India",flag:"🇮🇳",lat:23.03,lng:72.58},
-  {city:"Sydney",country:"Australia",flag:"🇦🇺",lat:-33.87,lng:151.21},
-  {city:"Melbourne",country:"Australia",flag:"🇦🇺",lat:-37.81,lng:144.96},
-  {city:"Brisbane",country:"Australia",flag:"🇦🇺",lat:-27.47,lng:153.02},
-  {city:"Perth",country:"Australia",flag:"🇦🇺",lat:-31.95,lng:115.86},
-  {city:"Adelaide",country:"Australia",flag:"🇦🇺",lat:-34.93,lng:138.60},
-  {city:"Auckland",country:"New Zealand",flag:"🇳🇿",lat:-36.87,lng:174.77},
-  {city:"Wellington",country:"New Zealand",flag:"🇳🇿",lat:-41.29,lng:174.78},
-  {city:"Toronto",country:"Canada",flag:"🇨🇦",lat:43.65,lng:-79.38},
-  {city:"Vancouver",country:"Canada",flag:"🇨🇦",lat:49.28,lng:-123.12},
-  {city:"Montreal",country:"Canada",flag:"🇨🇦",lat:45.50,lng:-73.57},
-  {city:"Calgary",country:"Canada",flag:"🇨🇦",lat:51.05,lng:-114.07},
-  {city:"Ottawa",country:"Canada",flag:"🇨🇦",lat:45.42,lng:-75.70},
-  {city:"Edmonton",country:"Canada",flag:"🇨🇦",lat:53.55,lng:-113.49},
-  {city:"Winnipeg",country:"Canada",flag:"🇨🇦",lat:49.90,lng:-97.14},
-  {city:"Halifax",country:"Canada",flag:"🇨🇦",lat:44.65,lng:-63.58},
-  {city:"New York",country:"USA",flag:"🇺🇸",lat:40.71,lng:-74.01},
-  {city:"Los Angeles",country:"USA",flag:"🇺🇸",lat:34.05,lng:-118.24},
-  {city:"Chicago",country:"USA",flag:"🇺🇸",lat:41.88,lng:-87.63},
-  {city:"Houston",country:"USA",flag:"🇺🇸",lat:29.76,lng:-95.37},
-  {city:"Phoenix",country:"USA",flag:"🇺🇸",lat:33.45,lng:-112.07},
-  {city:"San Francisco",country:"USA",flag:"🇺🇸",lat:37.77,lng:-122.42},
-  {city:"Seattle",country:"USA",flag:"🇺🇸",lat:47.61,lng:-122.33},
-  {city:"Miami",country:"USA",flag:"🇺🇸",lat:25.77,lng:-80.19},
-  {city:"Dallas",country:"USA",flag:"🇺🇸",lat:32.78,lng:-96.80},
-  {city:"Atlanta",country:"USA",flag:"🇺🇸",lat:33.75,lng:-84.39},
-  {city:"Boston",country:"USA",flag:"🇺🇸",lat:42.36,lng:-71.06},
-  {city:"Denver",country:"USA",flag:"🇺🇸",lat:39.74,lng:-104.98},
-  {city:"Las Vegas",country:"USA",flag:"🇺🇸",lat:36.17,lng:-115.14},
-  {city:"Portland",country:"USA",flag:"🇺🇸",lat:45.52,lng:-122.68},
-  {city:"Mexico City",country:"Mexico",flag:"🇲🇽",lat:19.43,lng:-99.13},
-  {city:"Guadalajara",country:"Mexico",flag:"🇲🇽",lat:20.66,lng:-103.35},
-  {city:"Monterrey",country:"Mexico",flag:"🇲🇽",lat:25.68,lng:-100.32},
-  {city:"Sao Paulo",country:"Brazil",flag:"🇧🇷",lat:-23.55,lng:-46.63},
-  {city:"Rio de Janeiro",country:"Brazil",flag:"🇧🇷",lat:-22.91,lng:-43.17},
-  {city:"Brasilia",country:"Brazil",flag:"🇧🇷",lat:-15.78,lng:-47.93},
-  {city:"Buenos Aires",country:"Argentina",flag:"🇦🇷",lat:-34.60,lng:-58.38},
-  {city:"Santiago",country:"Chile",flag:"🇨🇱",lat:-33.45,lng:-70.67},
-  {city:"Lima",country:"Peru",flag:"🇵🇪",lat:-12.05,lng:-77.04},
-  {city:"Bogota",country:"Colombia",flag:"🇨🇴",lat:4.71,lng:-74.07},
-  {city:"Medellin",country:"Colombia",flag:"🇨🇴",lat:6.25,lng:-75.56},
-  {city:"Caracas",country:"Venezuela",flag:"🇻🇪",lat:10.48,lng:-66.88},
-  {city:"London",country:"United Kingdom",flag:"🇬🇧",lat:51.51,lng:-0.13},
-  {city:"Manchester",country:"United Kingdom",flag:"🇬🇧",lat:53.48,lng:-2.24},
-  {city:"Birmingham",country:"United Kingdom",flag:"🇬🇧",lat:52.48,lng:-1.90},
-  {city:"Glasgow",country:"United Kingdom",flag:"🇬🇧",lat:55.86,lng:-4.25},
-  {city:"Paris",country:"France",flag:"🇫🇷",lat:48.86,lng:2.35},
-  {city:"Lyon",country:"France",flag:"🇫🇷",lat:45.75,lng:4.83},
-  {city:"Marseille",country:"France",flag:"🇫🇷",lat:43.30,lng:5.37},
-  {city:"Frankfurt",country:"Germany",flag:"🇩🇪",lat:50.11,lng:8.68},
-  {city:"Berlin",country:"Germany",flag:"🇩🇪",lat:52.52,lng:13.40},
-  {city:"Munich",country:"Germany",flag:"🇩🇪",lat:48.14,lng:11.58},
-  {city:"Hamburg",country:"Germany",flag:"🇩🇪",lat:53.55,lng:9.99},
-  {city:"Amsterdam",country:"Netherlands",flag:"🇳🇱",lat:52.37,lng:4.90},
-  {city:"Rotterdam",country:"Netherlands",flag:"🇳🇱",lat:51.92,lng:4.48},
-  {city:"Madrid",country:"Spain",flag:"🇪🇸",lat:40.42,lng:-3.70},
-  {city:"Barcelona",country:"Spain",flag:"🇪🇸",lat:41.39,lng:2.15},
-  {city:"Milan",country:"Italy",flag:"🇮🇹",lat:45.46,lng:9.19},
-  {city:"Rome",country:"Italy",flag:"🇮🇹",lat:41.90,lng:12.49},
-  {city:"Zurich",country:"Switzerland",flag:"🇨🇭",lat:47.38,lng:8.54},
-  {city:"Geneva",country:"Switzerland",flag:"🇨🇭",lat:46.20,lng:6.14},
-  {city:"Brussels",country:"Belgium",flag:"🇧🇪",lat:50.85,lng:4.35},
-  {city:"Vienna",country:"Austria",flag:"🇦🇹",lat:48.21,lng:16.37},
-  {city:"Warsaw",country:"Poland",flag:"🇵🇱",lat:52.23,lng:21.01},
-  {city:"Prague",country:"Czech Republic",flag:"🇨🇿",lat:50.08,lng:14.44},
-  {city:"Stockholm",country:"Sweden",flag:"🇸🇪",lat:59.33,lng:18.07},
-  {city:"Copenhagen",country:"Denmark",flag:"🇩🇰",lat:55.68,lng:12.57},
-  {city:"Oslo",country:"Norway",flag:"🇳🇴",lat:59.91,lng:10.75},
-  {city:"Helsinki",country:"Finland",flag:"🇫🇮",lat:60.17,lng:24.94},
-  {city:"Lisbon",country:"Portugal",flag:"🇵🇹",lat:38.72,lng:-9.14},
-  {city:"Dublin",country:"Ireland",flag:"🇮🇪",lat:53.33,lng:-6.25},
-  {city:"Athens",country:"Greece",flag:"🇬🇷",lat:37.98,lng:23.73},
-  {city:"Budapest",country:"Hungary",flag:"🇭🇺",lat:47.50,lng:19.04},
-  {city:"Bucharest",country:"Romania",flag:"🇷🇴",lat:44.43,lng:26.10},
-  {city:"Sofia",country:"Bulgaria",flag:"🇧🇬",lat:42.70,lng:23.32},
-  {city:"Belgrade",country:"Serbia",flag:"🇷🇸",lat:44.82,lng:20.46},
-  {city:"Zagreb",country:"Croatia",flag:"🇭🇷",lat:45.81,lng:15.98},
-  {city:"Dubai",country:"UAE",flag:"🇦🇪",lat:25.20,lng:55.27},
-  {city:"Abu Dhabi",country:"UAE",flag:"🇦🇪",lat:24.45,lng:54.38},
-  {city:"Riyadh",country:"Saudi Arabia",flag:"🇸🇦",lat:24.69,lng:46.72},
-  {city:"Jeddah",country:"Saudi Arabia",flag:"🇸🇦",lat:21.49,lng:39.19},
-  {city:"Doha",country:"Qatar",flag:"🇶🇦",lat:25.29,lng:51.53},
-  {city:"Kuwait City",country:"Kuwait",flag:"🇰🇼",lat:29.37,lng:47.98},
-  {city:"Manama",country:"Bahrain",flag:"🇧🇭",lat:26.22,lng:50.59},
-  {city:"Muscat",country:"Oman",flag:"🇴🇲",lat:23.59,lng:58.59},
-  {city:"Tel Aviv",country:"Israel",flag:"🇮🇱",lat:32.07,lng:34.79},
-  {city:"Istanbul",country:"Turkey",flag:"🇹🇷",lat:41.01,lng:28.95},
-  {city:"Ankara",country:"Turkey",flag:"🇹🇷",lat:39.93,lng:32.86},
-  {city:"Amman",country:"Jordan",flag:"🇯🇴",lat:31.95,lng:35.93},
-  {city:"Beirut",country:"Lebanon",flag:"🇱🇧",lat:33.89,lng:35.50},
-  {city:"Baghdad",country:"Iraq",flag:"🇮🇶",lat:33.34,lng:44.40},
-  {city:"Tehran",country:"Iran",flag:"🇮🇷",lat:35.69,lng:51.39},
-  {city:"Cairo",country:"Egypt",flag:"🇪🇬",lat:30.04,lng:31.24},
-  {city:"Alexandria",country:"Egypt",flag:"🇪🇬",lat:31.20,lng:29.92},
-  {city:"Lagos",country:"Nigeria",flag:"🇳🇬",lat:6.45,lng:3.40},
-  {city:"Abuja",country:"Nigeria",flag:"🇳🇬",lat:9.07,lng:7.40},
-  {city:"Nairobi",country:"Kenya",flag:"🇰🇪",lat:-1.29,lng:36.82},
-  {city:"Johannesburg",country:"South Africa",flag:"🇿🇦",lat:-26.20,lng:28.04},
-  {city:"Cape Town",country:"South Africa",flag:"🇿🇦",lat:-33.93,lng:18.42},
-  {city:"Durban",country:"South Africa",flag:"🇿🇦",lat:-29.86,lng:31.02},
-  {city:"Casablanca",country:"Morocco",flag:"🇲🇦",lat:33.59,lng:-7.62},
-  {city:"Accra",country:"Ghana",flag:"🇬🇭",lat:5.56,lng:-0.20},
-  {city:"Addis Ababa",country:"Ethiopia",flag:"🇪🇹",lat:9.03,lng:38.74},
-  {city:"Dar es Salaam",country:"Tanzania",flag:"🇹🇿",lat:-6.79,lng:39.21},
-  {city:"Kampala",country:"Uganda",flag:"🇺🇬",lat:0.32,lng:32.58},
-  {city:"Khartoum",country:"Sudan",flag:"🇸🇩",lat:15.55,lng:32.53},
-  {city:"Dakar",country:"Senegal",flag:"🇸🇳",lat:14.72,lng:-17.47},
-  {city:"Tunis",country:"Tunisia",flag:"🇹🇳",lat:36.82,lng:10.17},
-  {city:"Algiers",country:"Algeria",flag:"🇩🇿",lat:36.74,lng:3.06},
-  {city:"Tripoli",country:"Libya",flag:"🇱🇾",lat:32.90,lng:13.18},
-  {city:"Moscow",country:"Russia",flag:"🇷🇺",lat:55.75,lng:37.62},
-  {city:"St. Petersburg",country:"Russia",flag:"🇷🇺",lat:59.94,lng:30.32},
-  {city:"Novosibirsk",country:"Russia",flag:"🇷🇺",lat:54.99,lng:82.90},
-  {city:"Kyiv",country:"Ukraine",flag:"🇺🇦",lat:50.45,lng:30.52},
-  {city:"Almaty",country:"Kazakhstan",flag:"🇰🇿",lat:43.24,lng:76.89},
-  {city:"Tashkent",country:"Uzbekistan",flag:"🇺🇿",lat:41.30,lng:69.24},
-];
-let rzPriority='Balanced';
-let projection=null;
-let mapZoom=null;
-let originCity=null,destCity=null;
-let geoTimers={origin:null,dest:null};
+// Global state
+let rzPriority = 'Balanced';
+let originCity = null;
+let destCity = null;
+let projection = null;
+let mapZoom = null;
+let geoTimers = { origin: null, dest: null };
 
-(function init(){
-  const t=new Date();
-  const pad=n=>String(n).padStart(2,'0');
-  document.getElementById('rz-deadline').min=`${t.getFullYear()}-${pad(t.getMonth()+1)}-${pad(t.getDate())}`;
+// ── INIT ─────────────────────────────────────────────
+(function init() {
+  const t = new Date();
+  const pad = n => String(n).padStart(2, '0');
+  document.getElementById('rz-deadline').min = t.getFullYear() + '-' + pad(t.getMonth() + 1) + '-' + pad(t.getDate());
+
+  // Close dropdowns on outside click
+  document.addEventListener('click', function(e) {
+    if (!e.target.closest('#orig-field')) document.getElementById('sug-origin').style.display = 'none';
+    if (!e.target.closest('#dest-field')) document.getElementById('sug-dest').style.display = 'none';
+  });
+
+  // Attach input listeners
+  document.getElementById('rz-origin').addEventListener('input', function() {
+    rzSuggest('origin', this.value);
+  });
+  document.getElementById('rz-dest').addEventListener('input', function() {
+    rzSuggest('dest', this.value);
+  });
 
   loadMap();
 })();
 
-function loadMap(){
-  const W=960,H=480;
-  projection=d3.geoNaturalEarth1().scale(153).translate([W/2,H/2]);
-  const path=d3.geoPath().projection(projection);
-  const svg=d3.select('#rz-mapsvg');
+// ── MAP ───────────────────────────────────────────────
+function loadMap() {
+  const W = 960, H = 480;
+  projection = d3.geoNaturalEarth1().scale(153).translate([W / 2, H / 2]);
+  const path = d3.geoPath().projection(projection);
+  const svg = d3.select('#rz-mapsvg');
 
-  // Add arrowhead marker to SVG defs once
-  svg.append('defs').html('<marker id="rzarrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#44ff44"/></marker>');
+  const zoomG = svg.append('g').attr('id', 'rz-zoom-g');
+  zoomG.append('g').attr('id', 'rz-land');
+  zoomG.append('g').attr('id', 'rz-arc');
 
-  // Create zoom container
-  const zoomG=svg.append('g').attr('id','rz-zoom-g');
-  zoomG.append('g').attr('id','rz-countries');
-  zoomG.append('g').attr('id','rz-route');
-
-  // Setup zoom
-  mapZoom=d3.zoom()
-    .scaleExtent([1,12])
-    .on('zoom',function(event){
-      zoomG.attr('transform',event.transform);
-    });
+  mapZoom = d3.zoom().scaleExtent([1, 12]).on('zoom', function(event) {
+    zoomG.attr('transform', event.transform);
+  });
 
   svg.call(mapZoom);
-  svg.on('dblclick.zoom',null);
+  svg.on('dblclick.zoom', null);
 
-  // Zoom buttons
-  d3.select('#rz-zoom-in').on('click',function(){
-    svg.transition().duration(300).call(mapZoom.scaleBy,1.6);
+  document.getElementById('rz-zoom-in').addEventListener('click', function() {
+    svg.transition().duration(300).call(mapZoom.scaleBy, 1.6);
   });
-  d3.select('#rz-zoom-out').on('click',function(){
-    svg.transition().duration(300).call(mapZoom.scaleBy,0.625);
+  document.getElementById('rz-zoom-out').addEventListener('click', function() {
+    svg.transition().duration(300).call(mapZoom.scaleBy, 0.625);
   });
-  d3.select('#rz-zoom-reset').on('click',function(){
-    svg.transition().duration(300).call(mapZoom.transform,d3.zoomIdentity);
+  document.getElementById('rz-zoom-reset').addEventListener('click', function() {
+    svg.transition().duration(300).call(mapZoom.transform, d3.zoomIdentity);
   });
 
-  // Load world map
-  d3.json('https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json').then(function(world){
-    const countries=topojson.feature(world,world.objects.countries);
-    d3.select('#rz-countries').selectAll('path')
+  d3.json('https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json').then(function(world) {
+    const countries = topojson.feature(world, world.objects.countries);
+    d3.select('#rz-land').selectAll('path')
       .data(countries.features).join('path')
-      .attr('d',path)
-      .attr('fill','#1a2e1a')
-      .attr('stroke','#2a3e2a')
-      .attr('stroke-width','0.5');
-  }).catch(function(){
-    d3.select('#rz-countries').append('text')
-      .attr('x',480).attr('y',240)
-      .attr('text-anchor','middle')
-      .attr('fill','#333')
-      .attr('font-size','14')
+      .attr('d', path)
+      .attr('fill', '#1a2e1a')
+      .attr('stroke', '#2a3e2a')
+      .attr('stroke-width', '0.5');
+  }).catch(function() {
+    d3.select('#rz-land').append('text')
+      .attr('x', 480).attr('y', 240)
+      .attr('text-anchor', 'middle')
+      .attr('fill', '#333').attr('font-size', '14')
       .text('Map requires internet connection');
   });
 }
 
-function updateRoute(){
-  const routeLayer=d3.select('#rz-route');
-  routeLayer.selectAll('*').remove();
-  if(!originCity||!destCity||!projection)return;
+function updateRoute() {
+  const arc = d3.select('#rz-arc');
+  arc.selectAll('*').remove();
+  if (!originCity || !destCity || !projection) return;
 
-  const [x1,y1]=projection([originCity.lng,originCity.lat]);
-  const [x2,y2]=projection([destCity.lng,destCity.lat]);
-  const mx=(x1+x2)/2;
-  const my=(y1+y2)/2-Math.abs(x2-x1)*0.35-30;
+  const p1 = projection([originCity.lng, originCity.lat]);
+  const p2 = projection([destCity.lng, destCity.lat]);
+  if (!p1 || !p2) return;
 
-  routeLayer.append('path')
-    .attr('d','M'+x1+','+y1+' Q'+mx+','+my+' '+x2+','+y2)
-    .attr('stroke','#44ff44')
-    .attr('stroke-width','1.5')
-    .attr('fill','none')
-    .attr('stroke-dasharray','5,3')
-    .attr('opacity','0.9');
+  const x1 = p1[0], y1 = p1[1];
+  const x2 = p2[0], y2 = p2[1];
+  const mx = (x1 + x2) / 2;
+  const my = (y1 + y2) / 2 - Math.abs(x2 - x1) * 0.3 - 25;
 
-  // Draw arrowhead manually at destination point
-  const angle=Math.atan2(y2-my,x2-mx);
-  const alen=10;
-  const a1x=x2-alen*Math.cos(angle-0.4);
-  const a1y=y2-alen*Math.sin(angle-0.4);
-  const a2x=x2-alen*Math.cos(angle+0.4);
-  const a2y=y2-alen*Math.sin(angle+0.4);
-  routeLayer.append('polygon')
-    .attr('points',x2+','+y2+' '+a1x+','+a1y+' '+a2x+','+a2y)
-    .attr('fill','#44ff44')
-    .attr('opacity','0.9');
+  // Curved line
+  arc.append('path')
+    .attr('d', 'M' + x1 + ',' + y1 + ' Q' + mx + ',' + my + ' ' + x2 + ',' + y2)
+    .attr('stroke', '#44ff44')
+    .attr('stroke-width', '1.5')
+    .attr('fill', 'none')
+    .attr('stroke-dasharray', '5,3')
+    .attr('opacity', '0.9');
 
-  routeLayer.append('circle').attr('cx',x1).attr('cy',y1).attr('r',5).attr('fill','#44ff44');
-  routeLayer.append('circle').attr('cx',x2).attr('cy',y2).attr('r',5).attr('fill','#ff4444');
+  // Arrowhead at destination
+  const angle = Math.atan2(y2 - my, x2 - mx);
+  const al = 10;
+  const ax1 = x2 - al * Math.cos(angle - 0.45);
+  const ay1 = y2 - al * Math.sin(angle - 0.45);
+  const ax2 = x2 - al * Math.cos(angle + 0.45);
+  const ay2 = y2 - al * Math.sin(angle + 0.45);
 
-  const o1=y1>300?16:-12;
-  const o2=y2>300?16:-12;
+  arc.append('polygon')
+    .attr('points', x2 + ',' + y2 + ' ' + ax1 + ',' + ay1 + ' ' + ax2 + ',' + ay2)
+    .attr('fill', '#44ff44');
 
-  routeLayer.append('text')
-    .attr('x',x1).attr('y',y1+o1)
-    .attr('text-anchor','middle')
-    .attr('fill','#44ff44')
-    .attr('font-size','10')
-    .attr('font-family','Rajdhani,sans-serif')
-    .attr('letter-spacing','0.8')
-    .text(originCity.city.toUpperCase());
+  // Dots
+  arc.append('circle').attr('cx', x1).attr('cy', y1).attr('r', 5).attr('fill', '#44ff44');
+  arc.append('circle').attr('cx', x2).attr('cy', y2).attr('r', 5).attr('fill', '#ff4444');
 
-  routeLayer.append('text')
-    .attr('x',x2).attr('y',y2+o2)
-    .attr('text-anchor','middle')
-    .attr('fill','#ff5555')
-    .attr('font-size','10')
-    .attr('font-family','Rajdhani,sans-serif')
-    .attr('letter-spacing','0.8')
-    .text(destCity.city.toUpperCase());
+  // Labels
+  const o1 = y1 > 300 ? 16 : -10;
+  const o2 = y2 > 300 ? 16 : -10;
+  arc.append('text').attr('x', x1).attr('y', y1 + o1).attr('text-anchor', 'middle').attr('fill', '#44ff44').attr('font-size', '10').attr('font-family', 'Rajdhani,sans-serif').text(originCity.name.toUpperCase());
+  arc.append('text').attr('x', x2).attr('y', y2 + o2).attr('text-anchor', 'middle').attr('fill', '#ff5555').attr('font-size', '10').attr('font-family', 'Rajdhani,sans-serif').text(destCity.name.toUpperCase());
 
-  document.getElementById('rz-map-hint').textContent=originCity.city+' → '+destCity.city;
+  document.getElementById('rz-map-hint').textContent = originCity.name + ' → ' + destCity.name;
 }
 
-
-function rzPrio(el){document.querySelectorAll('.rz-prio').forEach(e=>e.classList.remove('active'));el.classList.add('active');rzPriority=el.dataset.p;}
-
-
-
-
-
-function rzSuggest(field,val){
-  const id=field==='origin'?'sug-origin':'sug-dest';
-  const box=document.getElementById(id);
+// ── GEOCODING ─────────────────────────────────────────
+function rzSuggest(field, val) {
+  const boxId = field === 'origin' ? 'sug-origin' : 'sug-dest';
+  const box = document.getElementById(boxId);
   clearTimeout(geoTimers[field]);
-  if(val.length<3){box.style.display='none';return;}
-  box.innerHTML='<div style="padding:10px 12px;font-size:12px;color:#444;font-family:Rajdhani,sans-serif;letter-spacing:1px">Searching...</div>';
-  box.style.display='block';
-  geoTimers[field]=setTimeout(async function(){
-    try{
-      const res=await fetch('https://api.locationiq.com/v1/autocomplete?key=pk.9c12c6c14e47d57b7c8506514a12b36a&q='+encodeURIComponent(val)+'&limit=8&dedupe=1&format=json');
-      const data=await res.json();
-      if(!data||!data.length){box.style.display='none';return;}
-      box.innerHTML='';
-      data.forEach(function(r){
-        const name=r.display_name||r.display_place||'';
-        const parts=name.split(',');
-        const city=parts[0].trim();
-        const country=parts[parts.length-1].trim();
-        const flag=getFlag(r.address&&r.address.country_code);
-        const div=document.createElement('div');
-        div.className='rz-sug-item';
-        div.innerHTML='<span class="rz-sug-flag">'+flag+'</span><div><div class="rz-sug-city">'+city+'</div><div class="rz-sug-detail">'+name+'</div></div>';
-        div.onclick=function(){rzPickSug(field,name,parseFloat(r.lat),parseFloat(r.lon));};
-        box.appendChild(div);
+
+  if (val.length < 3) {
+    box.style.display = 'none';
+    return;
+  }
+
+  box.innerHTML = '<div style="padding:10px 12px;font-size:12px;color:#444;font-family:Rajdhani,sans-serif;letter-spacing:1px">Searching...</div>';
+  box.style.display = 'block';
+
+  geoTimers[field] = setTimeout(function() {
+    var url = 'https://api.locationiq.com/v1/autocomplete?key=' + LOCATIONIQ_KEY + '&q=' + encodeURIComponent(val) + '&limit=8&dedupe=1&format=json';
+    fetch(url)
+      .then(function(r) { return r.json(); })
+      .then(function(data) {
+        if (!data || !data.length) {
+          box.style.display = 'none';
+          return;
+        }
+        box.innerHTML = '';
+        data.forEach(function(r) {
+          var displayName = r.display_name || '';
+          var parts = displayName.split(',');
+          var cityName = parts[0].trim();
+          var countryCode = (r.address && r.address.country_code) ? r.address.country_code : '';
+          var flag = countryCode ? countryCode.toUpperCase().split('').map(function(c) { return String.fromCodePoint(c.charCodeAt(0) + 127397); }).join('') : '🌍';
+
+          var div = document.createElement('div');
+          div.className = 'rz-sug-item';
+          var inner = document.createElement('span');
+          inner.className = 'rz-sug-flag';
+          inner.textContent = flag;
+          var info = document.createElement('div');
+          var cityDiv = document.createElement('div');
+          cityDiv.className = 'rz-sug-city';
+          cityDiv.textContent = cityName;
+          var detailDiv = document.createElement('div');
+          detailDiv.className = 'rz-sug-detail';
+          detailDiv.textContent = displayName;
+          info.appendChild(cityDiv);
+          info.appendChild(detailDiv);
+          div.appendChild(inner);
+          div.appendChild(info);
+
+          var lat = parseFloat(r.lat);
+          var lng = parseFloat(r.lon);
+          div.addEventListener('click', function() {
+            rzPickCity(field, cityName, displayName, lat, lng);
+          });
+          box.appendChild(div);
+        });
+        box.style.display = 'block';
+      })
+      .catch(function() {
+        box.innerHTML = '<div style="padding:10px 12px;font-size:12px;color:#ff5555;font-family:Rajdhani,sans-serif">Search failed. Try again.</div>';
       });
-      box.style.display='block';
-    }catch(e){
-      box.innerHTML='<div style="padding:10px 12px;font-size:12px;color:#ff5555">Search failed. Try again.</div>';
-    }
-  },400);
+  }, 400);
 }
 
-function getFlag(code){
-  if(!code)return'🌍';
-  return code.toUpperCase().split('').map(function(c){return String.fromCodePoint(c.charCodeAt(0)+127397);}).join('');
-}
-function rzPickSug(field,fullName,lat,lng){
-  document.getElementById(field==='origin'?'rz-origin':'rz-dest').value=fullName;
-  document.getElementById(field==='origin'?'sug-origin':'sug-dest').style.display='none';
-  const cityObj={city:fullName.split(',')[0],lat:parseFloat(lat),lng:parseFloat(lng),detail:fullName};
-  if(field==='origin')originCity=cityObj; else destCity=cityObj;
+function rzPickCity(field, name, fullName, lat, lng) {
+  var inputId = field === 'origin' ? 'rz-origin' : 'rz-dest';
+  var boxId = field === 'origin' ? 'sug-origin' : 'sug-dest';
+  document.getElementById(inputId).value = fullName;
+  document.getElementById(boxId).style.display = 'none';
+  var city = { name: name, fullName: fullName, lat: lat, lng: lng };
+  if (field === 'origin') originCity = city;
+  else destCity = city;
   updateRoute();
 }
 
-function rzFillWeight(){
-  const sel=document.getElementById('rz-product');
-  const opt=sel.options[sel.selectedIndex];
-  const w=parseFloat(opt.dataset.w);
-  const pill=document.getElementById('rz-wpill');
-  const qty=parseFloat(document.getElementById('rz-qty').value)||1;
-  if(w){
-    document.getElementById('rz-wtxt').textContent='Unit weight: '+(w<1?(w*1000).toFixed(0)+'g':w+'kg');
-    pill.style.display='inline-flex';
-    document.getElementById('rz-weight').value=(w*qty).toFixed(3);
-  }else{pill.style.display='none';document.getElementById('rz-weight').value='';}
+// ── FORM ──────────────────────────────────────────────
+function rzPrio(el) {
+  document.querySelectorAll('.rz-prio').forEach(function(e) { e.classList.remove('active'); });
+  el.classList.add('active');
+  rzPriority = el.dataset.p;
 }
 
-function rzUpdateWeight(){
-  const sel=document.getElementById('rz-product');
-  const opt=sel.options[sel.selectedIndex];
-  const w=parseFloat(opt.dataset.w);
-  const qty=parseFloat(document.getElementById('rz-qty').value)||1;
-  if(w)document.getElementById('rz-weight').value=(w*qty).toFixed(3);
+function rzFillWeight() {
+  var sel = document.getElementById('rz-product');
+  var opt = sel.options[sel.selectedIndex];
+  var w = parseFloat(opt.dataset.w);
+  var pill = document.getElementById('rz-wpill');
+  var qty = parseFloat(document.getElementById('rz-qty').value) || 1;
+  if (w) {
+    document.getElementById('rz-wtxt').textContent = 'Unit weight: ' + (w < 1 ? (w * 1000).toFixed(0) + 'g' : w + 'kg');
+    pill.style.display = 'inline-flex';
+    document.getElementById('rz-weight').value = (w * qty).toFixed(3);
+  } else {
+    pill.style.display = 'none';
+    document.getElementById('rz-weight').value = '';
+  }
 }
 
-function rzReset(){
+function rzUpdateWeight() {
+  var sel = document.getElementById('rz-product');
+  var opt = sel.options[sel.selectedIndex];
+  var w = parseFloat(opt.dataset.w);
+  var qty = parseFloat(document.getElementById('rz-qty').value) || 1;
+  if (w) document.getElementById('rz-weight').value = (w * qty).toFixed(3);
+}
+
+function rzReset() {
   document.getElementById('rz-results').classList.remove('on');
-  document.getElementById('rz-form').style.display='';
+  document.getElementById('rz-form').style.display = '';
 }
 
-function getCarrierBadge(carrier){
-  const c=carrier.toLowerCase();
-  if(c.includes('fedex'))return'<span class="rz-carrier-badge badge-fedex">FedEx</span>';
-  if(c.includes('ups'))return'<span class="rz-carrier-badge badge-ups">UPS</span>';
-  if(c.includes('dhl'))return'<span class="rz-carrier-badge badge-dhl">DHL</span>';
-  return'';
+function getCarrierBadge(carrier) {
+  var c = carrier.toLowerCase();
+  if (c.includes('fedex')) return '<span class="rz-carrier-badge badge-fedex">FedEx</span>';
+  if (c.includes('ups')) return '<span class="rz-carrier-badge badge-ups">UPS</span>';
+  if (c.includes('dhl')) return '<span class="rz-carrier-badge badge-dhl">DHL</span>';
+  return '';
 }
 
-function getModeStyle(mode){
-  const m=mode.toLowerCase();
-  if(m.includes('air')||m.includes('express')||m.includes('priority'))return{cls:'d-air',icon:'ti-plane'};
-  if(m.includes('sea')||m.includes('ocean')||m.includes('freight'))return{cls:'d-sea',icon:'ti-anchor'};
-  if(m.includes('rail')||m.includes('train'))return{cls:'d-land',icon:'ti-train'};
-  if(m.includes('truck')||m.includes('road')||m.includes('ground'))return{cls:'d-land',icon:'ti-truck'};
-  return{cls:'d-multi',icon:'ti-route'};
+function getModeStyle(mode) {
+  var m = mode.toLowerCase();
+  if (m.includes('air') || m.includes('express') || m.includes('priority')) return { cls: 'd-air', icon: 'ti-plane' };
+  if (m.includes('sea') || m.includes('ocean') || m.includes('freight')) return { cls: 'd-sea', icon: 'ti-anchor' };
+  if (m.includes('rail') || m.includes('train')) return { cls: 'd-land', icon: 'ti-train' };
+  if (m.includes('truck') || m.includes('road') || m.includes('ground')) return { cls: 'd-land', icon: 'ti-truck' };
+  return { cls: 'd-multi', icon: 'ti-route' };
 }
 
-async function rzRun(){
-  const origin=document.getElementById('rz-origin').value.trim();
-  const dest=document.getElementById('rz-dest').value.trim();
-  const deadline=document.getElementById('rz-deadline').value;
-  const product=document.getElementById('rz-product').value;
-  const qty=document.getElementById('rz-qty').value;
-  const weight=document.getElementById('rz-weight').value;
-  const err=document.getElementById('rz-err');
+// ── API CALL ──────────────────────────────────────────
+async function rzRun() {
+  var origin = document.getElementById('rz-origin').value.trim();
+  var dest = document.getElementById('rz-dest').value.trim();
+  var deadline = document.getElementById('rz-deadline').value;
+  var product = document.getElementById('rz-product').value;
+  var qty = document.getElementById('rz-qty').value;
+  var weight = document.getElementById('rz-weight').value;
+  var err = document.getElementById('rz-err');
 
-if(!origin||!dest||!deadline||!product||!qty||!weight){
-    err.textContent='All fields are required. Please complete the form.';err.classList.add('on');return;
+  if (!origin || !dest || !deadline || !product || !qty || !weight) {
+    err.textContent = 'All fields are required. Please complete the form.';
+    err.classList.add('on');
+    return;
   }
   err.classList.remove('on');
-  document.getElementById('rz-form').style.display='none';
-  const loader=document.getElementById('rz-loader');
-  loader.classList.add('on');
-  const msgs=['Querying FedEx international rates...','Checking UPS Worldwide tariffs...','Fetching DHL Express pricing...','Comparing carrier transit times...','Scoring reliability & feasibility...'];
-  let mi=0;const lt=document.getElementById('rz-ltxt');
-  const ti=setInterval(()=>{mi=(mi+1)%msgs.length;lt.textContent=msgs[mi];},900);
-  const days=Math.ceil((new Date(deadline)-new Date())/86400000);
+  document.getElementById('rz-form').style.display = 'none';
+  document.getElementById('rz-loader').classList.add('on');
 
-  const prompt=`You are a senior logistics analyst for Razer Inc. Analyze this shipment and return ONLY a raw JSON object — no markdown, no backticks, no text before or after.
+  var msgs = ['Querying FedEx international rates...', 'Checking UPS Worldwide tariffs...', 'Fetching DHL Express pricing...', 'Comparing carrier transit times...', 'Scoring reliability & feasibility...'];
+  var mi = 0;
+  var lt = document.getElementById('rz-ltxt');
+  var ti = setInterval(function() { mi = (mi + 1) % msgs.length; lt.textContent = msgs[mi]; }, 900);
 
-SHIPMENT:
-- Origin: ${origin}
-- Destination: ${dest}
-- Product: ${product} (consumer electronics)
-- Quantity: ${qty} units
-- Total weight: ${weight} kg
-- Deadline: ${deadline} (${days} days from today)
-- Priority: ${rzPriority}
+  var days = Math.ceil((new Date(deadline) - new Date()) / 86400000);
+  var prompt = 'You are a senior logistics analyst for Razer Inc. Analyze this shipment and return ONLY a raw JSON object — no markdown, no backticks.\n\nSHIPMENT:\n- Origin: ' + origin + '\n- Destination: ' + dest + '\n- Product: ' + product + ' (consumer electronics)\n- Quantity: ' + qty + ' units\n- Total weight: ' + weight + ' kg\n- Deadline: ' + deadline + ' (' + days + ' days from today)\n- Priority: ' + rzPriority + '\n\nGenerate exactly 3 options using ONLY FedEx, UPS, or DHL. Use realistic published rate benchmarks. Factor in electronics surcharges, fuel surcharges (20-25% air, 10-15% ocean), dimensional weight, and customs clearance time.\n\nReturn: {"routes":[{"carrier":"string","mode":"string","cost_usd":number,"transit_days":number,"eta":"string","reliability":number,"speed_score":number,"cost_score":number,"feasible":boolean,"recommended":boolean,"notes":"string"}],"reasoning":"string"}\n\nOne recommended:true. feasible:false if misses deadline. ETA as "Jun 22, 2026".';
 
-Generate exactly 3 options using ONLY FedEx, UPS, or DHL. Use realistic published rate benchmarks. Factor in electronics surcharges, fuel surcharges (20-25% air, 10-15% ocean), dimensional weight, and customs clearance time.
-
-Return: {"routes":[{"carrier":"string","mode":"string","service_code":"string","cost_usd":number,"transit_days":number,"eta":"string","reliability":number,"speed_score":number,"cost_score":number,"feasible":boolean,"recommended":boolean,"notes":"string"}],"reasoning":"string"}
-
-One recommended:true. feasible:false if misses deadline. ETA as "Jun 22, 2026".`;
-
-  try{
-    const res=await fetch('/api/proxy',{
-      method:'POST',
-      headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({model:'claude-haiku-4-5-20251001',max_tokens:1200,messages:[{role:'user',content:prompt}]})
+  try {
+    var res = await fetch('/api/proxy', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ model: 'claude-haiku-4-5-20251001', max_tokens: 1200, messages: [{ role: 'user', content: prompt }] })
     });
-    const data=await res.json();
-    if(data.error){throw new Error(data.error.message);}
-    const raw=data.content.map(c=>c.text||'').join('').replace(/```json|```/g,'').trim();
-    const parsed=JSON.parse(raw);
-    clearInterval(ti);loader.classList.remove('on');
+    var data = await res.json();
+    if (data.error) throw new Error(data.error.message);
+    var raw = data.content.map(function(c) { return c.text || ''; }).join('').replace(/```json|```/g, '').trim();
+    var parsed = JSON.parse(raw);
+    clearInterval(ti);
+    document.getElementById('rz-loader').classList.remove('on');
     rzRender(parsed);
-  }catch(e){
-    clearInterval(ti);loader.classList.remove('on');
-    document.getElementById('rz-form').style.display='';
-    err.textContent='Error: '+e.message+'. Please try again.';
+  } catch (e) {
+    clearInterval(ti);
+    document.getElementById('rz-loader').classList.remove('on');
+    document.getElementById('rz-form').style.display = '';
+    err.textContent = 'Error: ' + e.message;
     err.classList.add('on');
   }
 }
 
-function rzRender(data){
-  const container=document.getElementById('rz-cards');
-  container.innerHTML='';
-  const sorted=[...data.routes].sort((a,b)=>(b.recommended?1:0)-(a.recommended?1:0));
-  sorted.forEach(r=>{
-    const{cls,icon}=getModeStyle(r.mode);
-    const etaColor=r.feasible?'#bbb':'#ff5555';
-    const cost='$'+r.cost_usd.toLocaleString();
-    const badge=getCarrierBadge(r.carrier);
-    const card=document.createElement('div');
-    card.className='rz-card'+(r.recommended?' rec':'');
-    card.innerHTML=`
-      ${r.recommended?'<div class="rz-rec-pill">Recommended</div>':''}
-      <div class="rz-card-top">
-        <div class="rz-mode-row">
-          <div class="rz-mode-dot ${cls}"><i class="ti ${icon}" aria-hidden="true"></i></div>
-          <div>
-            <div class="rz-mname">${r.carrier}</div>
-            <div style="display:flex;align-items:center;gap:6px;margin-top:3px">${badge}<span style="font-size:11px;color:#333;font-family:'Rajdhani',sans-serif">${r.mode}</span></div>
-          </div>
-        </div>
-        <div style="text-align:right">
-          <div class="rz-cost-val">${cost}</div>
-          <div class="rz-cost-lbl">Est. total</div>
-        </div>
-      </div>
-      <div class="rz-stats">
-        <div class="rz-stat"><div class="rz-stat-lbl">Transit</div><div class="rz-stat-val">${r.transit_days}d</div></div>
-        <div class="rz-stat"><div class="rz-stat-lbl">ETA</div><div class="rz-stat-val" style="color:${etaColor};font-size:11px">${r.eta}</div></div>
-        <div class="rz-stat"><div class="rz-stat-lbl">Reliability</div><div class="rz-stat-val">${r.reliability}%</div></div>
-      </div>
-      <div class="rz-bars">
-        <div class="rz-brow"><span class="rz-blbl">Speed</span><div class="rz-btrack"><div class="rz-bfill" style="width:${r.speed_score}%"></div></div><span class="rz-bnum">${r.speed_score}</span></div>
-        <div class="rz-brow"><span class="rz-blbl">Cost eff.</span><div class="rz-btrack"><div class="rz-bfill" style="width:${r.cost_score}%"></div></div><span class="rz-bnum">${r.cost_score}</span></div>
-        <div class="rz-brow"><span class="rz-blbl">Reliability</span><div class="rz-btrack"><div class="rz-bfill" style="width:${r.reliability}%"></div></div><span class="rz-bnum">${r.reliability}</span></div>
-      </div>
-      <div class="rz-note"><i class="ti ti-info-circle" style="font-size:13px;vertical-align:-1px;margin-right:5px;color:#44ff44"></i>${r.notes}</div>
-    `;
+function rzRender(data) {
+  var container = document.getElementById('rz-cards');
+  container.innerHTML = '';
+  var sorted = data.routes.slice().sort(function(a, b) { return (b.recommended ? 1 : 0) - (a.recommended ? 1 : 0); });
+  sorted.forEach(function(r) {
+    var ms = getModeStyle(r.mode);
+    var etaColor = r.feasible ? '#bbb' : '#ff5555';
+    var cost = '$' + r.cost_usd.toLocaleString();
+    var badge = getCarrierBadge(r.carrier);
+    var card = document.createElement('div');
+    card.className = 'rz-card' + (r.recommended ? ' rec' : '');
+    card.innerHTML = (r.recommended ? '<div class="rz-rec-pill">Recommended</div>' : '') +
+      '<div class="rz-card-top"><div class="rz-mode-row"><div class="rz-mode-dot ' + ms.cls + '"><i class="ti ' + ms.icon + '"></i></div>' +
+      '<div><div class="rz-mname">' + r.carrier + '</div><div style="display:flex;align-items:center;gap:6px;margin-top:3px">' + badge + '<span style="font-size:11px;color:#333;font-family:Rajdhani,sans-serif">' + r.mode + '</span></div></div></div>' +
+      '<div><div class="rz-cost-val">' + cost + '</div><div class="rz-cost-lbl">Est. total</div></div></div>' +
+      '<div class="rz-stats"><div class="rz-stat"><div class="rz-stat-lbl">Transit</div><div class="rz-stat-val">' + r.transit_days + 'd</div></div>' +
+      '<div class="rz-stat"><div class="rz-stat-lbl">ETA</div><div class="rz-stat-val" style="color:' + etaColor + ';font-size:11px">' + r.eta + '</div></div>' +
+      '<div class="rz-stat"><div class="rz-stat-lbl">Reliability</div><div class="rz-stat-val">' + r.reliability + '%</div></div></div>' +
+      '<div class="rz-bars">' +
+      '<div class="rz-brow"><span class="rz-blbl">Speed</span><div class="rz-btrack"><div class="rz-bfill" style="width:' + r.speed_score + '%"></div></div><span class="rz-bnum">' + r.speed_score + '</span></div>' +
+      '<div class="rz-brow"><span class="rz-blbl">Cost eff.</span><div class="rz-btrack"><div class="rz-bfill" style="width:' + r.cost_score + '%"></div></div><span class="rz-bnum">' + r.cost_score + '</span></div>' +
+      '<div class="rz-brow"><span class="rz-blbl">Reliability</span><div class="rz-btrack"><div class="rz-bfill" style="width:' + r.reliability + '%"></div></div><span class="rz-bnum">' + r.reliability + '</span></div></div>' +
+      '<div class="rz-note"><i class="ti ti-info-circle" style="font-size:13px;vertical-align:-1px;margin-right:5px;color:#44ff44"></i>' + r.notes + '</div>';
     container.appendChild(card);
   });
-  document.getElementById('rz-reasoning').innerHTML=`<div class="rz-r-lbl">Atlas reasoning</div><div class="rz-r-txt">${data.reasoning}</div>`;
+  document.getElementById('rz-reasoning').innerHTML = '<div class="rz-r-lbl">Atlas reasoning</div><div class="rz-r-txt">' + data.reasoning + '</div>';
   document.getElementById('rz-results').classList.add('on');
 }
 </script>
